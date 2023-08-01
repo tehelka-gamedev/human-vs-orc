@@ -155,6 +155,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="HumanVSOrc.cpp" />
+    <ClCompile Include="src\Attribute.cpp" />
+    <ClCompile Include="src\Bonus.cpp" />
+    <ClCompile Include="src\LifeComponent.cpp" />
+    <ClCompile Include="src\LifeSystem.cpp" />
+    <ClCompile Include="src\Weapon.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Attribute.h" />
+    <ClInclude Include="src\Bonus.h" />
+    <ClInclude Include="src\BonusType.h" />
+    <ClInclude Include="src\LifeComponent.h" />
+    <ClInclude Include="src\LifeSystem.h" />
+    <ClInclude Include="src\Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
