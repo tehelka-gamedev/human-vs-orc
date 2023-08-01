@@ -28,6 +28,9 @@ public:
     void Tick(); // Decrease the time left of all bonuses by 1.
 
     float GetValue();
+
+    // Setters
+    void SetBaseValue(float new_value);
     
     
 };

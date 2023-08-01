@@ -8,9 +8,9 @@ bool LifeComponent::isDepleted() const
     return value <= 0;
 }
 
-bool LifeComponent::isFull() const
+bool LifeComponent::isFull()
 {
-    return value >= max_value;
+    return value >= max_value.GetValue();
 }
 
 float LifeComponent::TakeDamage(const float damage)
@@ -30,9 +30,9 @@ float LifeComponent::GetValue() const
     return value;
 }
 
-float LifeComponent::GetMaxValue() const
+float LifeComponent::GetMaxValue()
 {
-    return max_value;
+    return max_value.GetValue();
 }
 
 std::string LifeComponent::GetName() const
@@ -47,7 +47,7 @@ void LifeComponent::SetValue(float new_value)
 
 void LifeComponent::SetMaxValue(float new_max_value)
 {
-    max_value = new_max_value;
+    max_value.SetBaseValue(new_max_value);
 }
 
 void LifeComponent::SetName(const std::string& new_name)

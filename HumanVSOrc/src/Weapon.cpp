@@ -4,6 +4,11 @@ Weapon::Weapon(std::string name, float damage) : name(std::move(name)), damage_b
 {
 }
 
+std::string Weapon::GetName() const
+{
+    return name;
+}
+
 std::shared_ptr<Bonus>& Weapon::GetDamageBonus()
 {
     return damage_bonus;

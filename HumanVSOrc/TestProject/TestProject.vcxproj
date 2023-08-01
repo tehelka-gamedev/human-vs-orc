@@ -40,7 +40,7 @@
     <ClCompile Include="..\src\Bonus.cpp" />
     <ClCompile Include="..\src\LifeComponent.cpp" />
     <ClCompile Include="..\src\LifeSystem.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="TestLifeSystem.cpp" />
     <ClCompile Include="TestAttributes.cpp" />
     <ClCompile Include="TestBonuses.cpp" />
   </ItemGroup>

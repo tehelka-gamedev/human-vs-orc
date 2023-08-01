@@ -18,11 +18,7 @@ int main(int argc, char* argv[])
     // Print the attribute value
     std::cout << attribute.GetValue() << std::endl;
     std::cout << "Hello world z!" << std::endl;
-
-    // A a;
-    // B b;
-    //
-    // a.AddBonus(b.bonus);
+    
     
     return 0;
 }

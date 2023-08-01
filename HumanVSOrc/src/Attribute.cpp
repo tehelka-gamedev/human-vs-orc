@@ -128,3 +128,8 @@ float Attribute::GetValue()
     }
     return final_value;
 }
+
+void Attribute::SetBaseValue(float new_value)
+{
+    base_value = new_value;
+}
