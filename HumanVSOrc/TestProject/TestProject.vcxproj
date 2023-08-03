@@ -40,9 +40,11 @@
     <ClCompile Include="..\src\Bonus.cpp" />
     <ClCompile Include="..\src\LifeComponent.cpp" />
     <ClCompile Include="..\src\LifeSystem.cpp" />
+    <ClCompile Include="..\src\Unit.cpp" />
     <ClCompile Include="TestLifeSystem.cpp" />
     <ClCompile Include="TestAttributes.cpp" />
     <ClCompile Include="TestBonuses.cpp" />
+    <ClCompile Include="TestUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -59,6 +61,7 @@
     <ClInclude Include="..\src\BonusType.h" />
     <ClInclude Include="..\src\LifeComponent.h" />
     <ClInclude Include="..\src\LifeSystem.h" />
+    <ClInclude Include="..\src\Unit.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

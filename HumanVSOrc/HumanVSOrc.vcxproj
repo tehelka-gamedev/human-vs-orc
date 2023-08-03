@@ -159,14 +159,17 @@
     <ClCompile Include="src\Bonus.cpp" />
     <ClCompile Include="src\LifeComponent.cpp" />
     <ClCompile Include="src\LifeSystem.cpp" />
+    <ClCompile Include="src\Unit.cpp" />
     <ClCompile Include="src\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Attribute.h" />
     <ClInclude Include="src\Bonus.h" />
     <ClInclude Include="src\BonusType.h" />
+    <ClInclude Include="src\const.h" />
     <ClInclude Include="src\LifeComponent.h" />
     <ClInclude Include="src\LifeSystem.h" />
+    <ClInclude Include="src\Unit.h" />
     <ClInclude Include="src\Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
