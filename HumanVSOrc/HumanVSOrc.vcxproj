@@ -165,7 +165,7 @@
   <ItemGroup>
     <ClInclude Include="src\Attribute.h" />
     <ClInclude Include="src\Bonus.h" />
-    <ClInclude Include="src\BonusType.h" />
+    <ClInclude Include="src\AttributeType.h" />
     <ClInclude Include="src\const.h" />
     <ClInclude Include="src\LifeComponent.h" />
     <ClInclude Include="src\LifeSystem.h" />

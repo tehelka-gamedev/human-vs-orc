@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include <memory>
+#include <string>
 #include <vector>
+
+#include "AttributeType.h"
 
 // TODO : refactor this class to use pointers to bonuses instead of copying them
 // As they will be created outside of the attribute class, it will be easier to manage them.
@@ -8,6 +11,8 @@ class Attribute
 {
     // Attributes
 private:
+    AttributeType attribute_type;
+    std::string display_name;
     float base_value = 0;
     std::vector<std::shared_ptr<class Bonus>> raw_bonus;
     std::vector<std::shared_ptr<Bonus>> final_bonus;
@@ -17,9 +22,13 @@ private:
 
     float CalculateFinalValue();
 public:
-    Attribute(float value);
+    Attribute(AttributeType attribute_type, const std::string& name, float value);
     ~Attribute();
 
+    void AddBonus(const std::shared_ptr<Bonus>& bonus);
+    void RemoveBonus(std::shared_ptr<Bonus>& bonus);
+    
+    // TODO : set this to private
     void AddRawBonus(const std::shared_ptr<Bonus>& bonus);
     void AddFinalBonus(const std::shared_ptr<Bonus>& bonus);
     void RemoveRawBonus(std::shared_ptr<Bonus>& bonus);
@@ -28,6 +37,8 @@ public:
     void Tick(); // Decrease the time left of all bonuses by 1.
 
     float GetValue();
+    AttributeType GetAttributeType() const;
+    std::string GetDisplayName() const;
 
     // Setters
     void SetBaseValue(float new_value);

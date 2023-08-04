@@ -5,10 +5,10 @@
 // Test that attributes are correctly initialized
 TEST(TestBonuses, TestInitialisation)
 {
-    Bonus bonus(10, BonusType::HEALTH, 5);
+    Bonus bonus(10, AttributeType::HEALTH, Bonus::Type::RAW, 5);
     EXPECT_FLOAT_EQ(bonus.GetValue(), 10);
     EXPECT_FLOAT_EQ(bonus.GetMultiplier(), 0);
-    EXPECT_EQ(bonus.GetBonusType(), BonusType::HEALTH);
+    EXPECT_EQ(bonus.GetTargetAttribute(), AttributeType::HEALTH);
     EXPECT_EQ(bonus.GetTimeLeft(), 5);
     EXPECT_EQ(bonus.IsOver(), false);
 }
@@ -16,7 +16,7 @@ TEST(TestBonuses, TestInitialisation)
 // Test that attributes decay correctly
 TEST(TestBonuses, TestDecay)
 {
-    Bonus bonus(10, BonusType::HEALTH, 5);
+    Bonus bonus(10, AttributeType::HEALTH, Bonus::Type::RAW, 5);
     bonus.Tick();
     EXPECT_EQ(bonus.GetTimeLeft(), 4);
     bonus.Tick();

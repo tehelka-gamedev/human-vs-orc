@@ -34,7 +34,7 @@ float Attribute::CalculateFinalValue()
     return final_value;
 }
 
-Attribute::Attribute(float value) : base_value(value)
+Attribute::Attribute(AttributeType attribute_type, const std::string& name, float value) : attribute_type(attribute_type), display_name(name), base_value(value)
 {
     final_value = CalculateFinalValue();
 }
@@ -42,11 +42,38 @@ Attribute::Attribute(float value) : base_value(value)
 Attribute::~Attribute()
 = default;
 
+void Attribute::AddBonus(const std::shared_ptr<Bonus>& bonus)
+{
+    switch (bonus->GetBonusType())
+    {
+    case Bonus::Type::RAW:
+        AddRawBonus(bonus);
+        break;
+    case Bonus::Type::FINAL:
+        AddFinalBonus(bonus);
+        break;
+    }
+        
+}
+
+void Attribute::RemoveBonus(std::shared_ptr<Bonus>& bonus)
+{
+    switch (bonus->GetBonusType())
+    {
+    case Bonus::Type::RAW:
+        RemoveRawBonus(bonus);
+        break;
+    case Bonus::Type::FINAL:
+        RemoveFinalBonus(bonus);
+        break;
+    }
+}
+
 void Attribute::AddRawBonus(const std::shared_ptr<Bonus>& bonus)
 {
     raw_bonus.push_back(bonus);
     // print the address of the newly created bonus
-    std::cout << "Bonus added : " << raw_bonus.back().get() << std::endl;
+    //std::cout << "Bonus added : " << raw_bonus.back().get() << std::endl;
     is_dirty = true;
 }
 
@@ -127,6 +154,16 @@ float Attribute::GetValue()
         final_value = CalculateFinalValue();
     }
     return final_value;
+}
+
+AttributeType Attribute::GetAttributeType() const
+{
+    return attribute_type;
+}
+
+std::string Attribute::GetDisplayName() const
+{
+    return display_name;
 }
 
 void Attribute::SetBaseValue(float new_value)

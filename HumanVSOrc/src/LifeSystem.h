@@ -17,6 +17,12 @@ private:
 public:
     LifeSystem();
     ~LifeSystem();
+
+    // Iterate over all components and add the bonus to the first
+    // component that matches the bonus target attribute
+    void AddBonus(const std::shared_ptr<class Bonus>& bonus);
+    bool HasComponent(enum class AttributeType attribute_type) const;
+    
     // Take damage to the first non-depleted life component
     // until the damage is depleted, starting from the last added component
     void TakeDamage(float damage);
@@ -24,12 +30,12 @@ public:
     // Returns true if all life components are depleted
     bool IsDepleted() const;
     
-    void AddComponent(std::string name, float max_value);
+    void AddComponent(enum class AttributeType attribute_type, const std::string& display_name, float max_value);
 
     // Get a component value or max value, given its name
     // If the component does not exist, return -1
-    float GetComponentValue(const std::string& name) const;
-    float GetComponentMaxValue(const std::string& name) const;
+    float GetComponentValue(AttributeType attribute_type) const;
+    float GetComponentMaxValue(AttributeType attribute_type) const;
     
     
     // Debug function to print the life components

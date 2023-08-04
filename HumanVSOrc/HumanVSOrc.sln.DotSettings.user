@@ -10,6 +10,9 @@
       &lt;TestId&gt;GTest::A3814245-BD17-4330-BA1A-BBA2C81CD669::Windows,Version=v10.0.22000::TestAttributes.TestRawBonusWithMultiplier&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;GTest::A3814245-BD17-4330-BA1A-BBA2C81CD669::Windows,Version=v10.0.22000::TestAttributes.TestRemoveRawBonus&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;GTest::A3814245-BD17-4330-BA1A-BBA2C81CD669::Windows,Version=v10.0.22000::TestAttributes.TestMultipleBonuses&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;GTest::A3814245-BD17-4330-BA1A-BBA2C81CD669::Windows,Version=v10.0.22000::TestUnit.TestTakeDamage&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;GTest::A3814245-BD17-4330-BA1A-BBA2C81CD669::Windows,Version=v10.0.22000::TestUnit.TestTakeDamageToDeath&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;GTest::A3814245-BD17-4330-BA1A-BBA2C81CD669::Windows,Version=v10.0.22000::TestUnit.TestTakeDamageThenBonus&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
     &lt;ProjectFile&gt;A3814245-BD17-4330-BA1A-BBA2C81CD669/f:TestLifeSystem.cpp&lt;/ProjectFile&gt;&#xD;
   &lt;/Or&gt;&#xD;

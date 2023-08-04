@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-enum class BonusType
+enum class AttributeType
 {
     HEALTH,
     SHIELD,
