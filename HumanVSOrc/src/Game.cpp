@@ -1,0 +1,94 @@
+﻿#include "Game.h"
+
+#include <iomanip>
+#include <iostream>
+
+#include "Unit.h"
+
+void Game::Init()
+{
+}
+
+void Game::CreateUnits()
+{
+}
+
+Game::Game() : turn(0)
+{
+}
+
+Game::~Game()
+= default;
+
+void Game::Run()
+{
+    PrintTitle();
+    std::cout << std::fixed << std::setprecision(0);
+
+    Init();
+
+    while(!IsOver())
+    {
+        Update();
+        std::cout.flush();
+        std::cout << "Press Enter to continue to next turn";
+        std::cin.ignore();
+    }
+    
+}
+
+void Game::Update()
+{
+    turn++;
+    std::cout << " -- TURN " << turn << " -- " << std::endl;
+    
+    std::cout << std::endl << "Units status at the beginning of the turn:" << std::endl;
+
+    // Display unit status
+    for(const std::unique_ptr<Unit>& unit : unit_list)
+    {
+        unit->PrintInfo();
+    }
+    std::cout << std::endl;
+
+    // Update all units
+    for(const std::unique_ptr<Unit>& unit : unit_list)
+    {
+        // TODO : tick all skills cooldown down
+        unit->TickAllBonuses();
+        // TODO : update status effects
+    }
+
+    // All units cast their skills
+    for(const std::unique_ptr<Unit>& unit : unit_list)
+    {
+        // unit->CastAllSkills(); // TODO Later
+    }
+
+    // All units attack
+    for(const std::unique_ptr<Unit>& unit : unit_list)
+    {
+        //unit->Attack(); // TODO
+    }
+
+    std::cout << std::endl;
+    std::cout << std::endl;
+}
+
+void Game::PrintTitle() const
+{
+    std::cout << R"(  _    _                             )" << "\n";
+    std::cout << R"( | |  | |                            )" << "\n";
+    std::cout << R"( | |__| |_   _ _ __ ___   __ _ _ __  )" << "\n";
+    std::cout << R"( |  __  | | | | '_ ` _ \ / _` | '_ \ )" << "\n";
+    std::cout << R"( | |  | | |_| | | | | | | (_| | | | |)" << "\n";
+    std::cout << R"( |_|  |_|\__,_|_| |_| |_|\__,_|_| |_|)" << "\n";
+    std::cout << R"( __      _______    ____             )" << "\n";
+    std::cout << R"( \ \    / / ____|  / __ \            )" << "\n";
+    std::cout << R"(  \ \  / / (___   | |  | |_ __ ___   )" << "\n";
+    std::cout << R"(   \ \/ / \___ \  | |  | | '__/ __|  )" << "\n";
+    std::cout << R"(    \  /  ____) | | |__| | | | (__   )" << "\n";
+    std::cout << R"(     \/  |_____/   \____/|_|  \___|  )" << "\n";
+
+    std::cout << std::endl;
+}

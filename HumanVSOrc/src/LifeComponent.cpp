@@ -23,6 +23,12 @@ void LifeComponent::AddBonus(const std::shared_ptr<Bonus>& bonus)
     //value += max_value.GetValue() - previous_max_value;
 }
 
+void LifeComponent::Tick()
+{
+    // Might add health regen here ?
+    max_value.Tick();
+}
+
 float LifeComponent::TakeDamage(const float damage)
 {
     value -= damage;

@@ -22,6 +22,8 @@ public:
     // component that matches the bonus target attribute
     void AddBonus(const std::shared_ptr<class Bonus>& bonus);
     bool HasComponent(enum class AttributeType attribute_type) const;
+
+    void Tick();
     
     // Take damage to the first non-depleted life component
     // until the damage is depleted, starting from the last added component

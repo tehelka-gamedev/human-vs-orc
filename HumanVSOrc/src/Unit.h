@@ -14,7 +14,7 @@ private:
     std::string name;
     std::unique_ptr<LifeSystem> life_system;
     std::map<AttributeType, std::unique_ptr<Attribute> > attributes = {};
-
+    
 
 public:
     explicit Unit(std::string name);
@@ -35,7 +35,10 @@ public:
     void TakeDamage(float amount) const;
 
     bool IsAlive() const;
-    
+
+    // For each attribute, Tick() all bonuses contained in the attributes
+    // that are either in the map or in the life system
+    void TickAllBonuses();
     
     // Getters
     std::string GetName() const;
@@ -47,4 +50,6 @@ public:
 
     // Debug function to print the unit info
     void PrintInfo() const;
+
+    
 };

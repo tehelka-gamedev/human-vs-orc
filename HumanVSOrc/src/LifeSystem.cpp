@@ -37,6 +37,14 @@ bool LifeSystem::HasComponent(AttributeType attribute_type) const
         );
 }
 
+void LifeSystem::Tick()
+{
+    for (std::unique_ptr<LifeComponent>& component : components)
+    {
+        component->Tick();
+    }
+}
+
 void LifeSystem::TakeDamage(float damage)
 {
     std::cerr << "Take " << damage << " damage" << std::endl;

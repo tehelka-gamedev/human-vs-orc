@@ -75,6 +75,15 @@ bool Unit::IsAlive() const
     return !life_system->IsDepleted();
 }
 
+void Unit::TickAllBonuses()
+{   
+    for (auto& attribute : attributes)
+    {
+        attribute.second->Tick();
+    }
+    life_system->Tick();
+}
+
 std::string Unit::GetName() const
 {
     return name;

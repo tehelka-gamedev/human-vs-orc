@@ -94,6 +94,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -109,6 +110,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,6 +128,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,6 +148,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -157,6 +161,7 @@
     <ClCompile Include="HumanVSOrc.cpp" />
     <ClCompile Include="src\Attribute.cpp" />
     <ClCompile Include="src\Bonus.cpp" />
+    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\LifeComponent.cpp" />
     <ClCompile Include="src\LifeSystem.cpp" />
     <ClCompile Include="src\Unit.cpp" />
@@ -167,8 +172,10 @@
     <ClInclude Include="src\Bonus.h" />
     <ClInclude Include="src\AttributeType.h" />
     <ClInclude Include="src\const.h" />
+    <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\LifeComponent.h" />
     <ClInclude Include="src\LifeSystem.h" />
+    <ClInclude Include="src\RandomGenerator.h" />
     <ClInclude Include="src\Unit.h" />
     <ClInclude Include="src\Weapon.h" />
   </ItemGroup>
