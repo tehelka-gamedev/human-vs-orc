@@ -15,11 +15,15 @@ private:
     std::unique_ptr<LifeSystem> life_system;
     std::map<AttributeType, std::unique_ptr<Attribute> > attributes = {};
     
-
+    std::weak_ptr<Unit> target;
 public:
     explicit Unit(std::string name);
     ~Unit();
 
+    // Attack the target
+    // If no target, do nothing
+    void Attack();
+    
     // Returns true if the unit has an attribute of the given type
     // Also check if the attribute is in the LifeSystem
     bool HasAttribute(AttributeType attribute_type) const;
@@ -44,9 +48,11 @@ public:
     std::string GetName() const;
     float GetLifeComponentValue(AttributeType attribute_type) const;
     float GetLifeComponentMaxValue(AttributeType attribute_type) const;
+    float GetAttributeValue(AttributeType attribute_type) const;
     
     // Setters
     void SetName(const std::string& new_name);
+    void SetTarget(const std::shared_ptr<Unit>& new_target);
 
     // Debug function to print the unit info
     void PrintInfo() const;

@@ -6,7 +6,7 @@ class Game
 {
     // Attributes
 private:
-    std::vector<std::unique_ptr<class Unit>> unit_list;
+    std::vector<std::shared_ptr<class Unit>> unit_list;
 
     int turn=0;
 

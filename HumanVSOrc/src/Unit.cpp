@@ -11,6 +11,26 @@ Unit::Unit(std::string name) : name(std::move(name)), life_system(std::make_uniq
 Unit::~Unit()
 = default;
 
+void Unit::Attack()
+{
+    // If no Damage attribute, cannot attack
+    if (!HasAttribute(AttributeType::DAMAGE))
+    {
+        std::cout << "Unit " << name << " tried to attack but has no damage attribute" << std::endl;
+        return;
+    }
+    
+    std::shared_ptr<Unit> target_ptr = target.lock();
+    if (!target_ptr)
+    {
+        std::cout << "Unit " << name << " tried to attack but has no target" << std::endl;
+        return;
+    }
+
+    std::cout << name << " attacks " << target_ptr->name << std::endl;
+    target_ptr->TakeDamage(GetAttributeValue(AttributeType::DAMAGE));
+}
+
 bool Unit::HasAttribute(AttributeType attribute_type) const
 {
     return attributes.find(attribute_type) != attributes.end() || life_system->HasComponent(attribute_type);
@@ -99,9 +119,19 @@ float Unit::GetLifeComponentMaxValue(AttributeType attribute_type) const
     return life_system->GetComponentMaxValue(attribute_type);
 }
 
+float Unit::GetAttributeValue(AttributeType attribute_type) const
+{
+    return attributes.at(attribute_type)->GetValue();
+}
+
 void Unit::SetName(const std::string& new_name)
 {   
     name = new_name;
+}
+
+void Unit::SetTarget(const std::shared_ptr<Unit>& new_target)
+{
+    target = new_target;
 }
 
 void Unit::PrintInfo() const

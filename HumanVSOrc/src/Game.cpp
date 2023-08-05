@@ -4,13 +4,28 @@
 #include <iostream>
 
 #include "Unit.h"
+#include "const.h"
 
 void Game::Init()
 {
+    CreateUnits();
+    unit_list[0]->SetTarget(unit_list[1]);
+    unit_list[1]->SetTarget(unit_list[0]);
+    
 }
 
 void Game::CreateUnits()
 {
+    // Create two units
+    unit_list.push_back(std::make_shared<Unit>("Human"));
+    unit_list.push_back(std::make_shared<Unit>("Orc"));
+
+    // Add Health and damage attributes to the units
+    unit_list[0]->AddLifeComponent(AttributeType::HEALTH, "Health", static_cast<float>(GameConstants::KnightConstants::BASE_HEALTH));
+    unit_list[0]->AddAttribute(AttributeType::DAMAGE, "Damage", static_cast<float>(GameConstants::KnightConstants::BASE_DAMAGE));
+
+    unit_list[1]->AddLifeComponent(AttributeType::HEALTH, "Health", static_cast<float>(GameConstants::OrcConstants::BASE_HEALTH));
+    unit_list[1]->AddAttribute(AttributeType::DAMAGE, "Damage", static_cast<float>(GameConstants::OrcConstants::BASE_DAMAGE));
 }
 
 Game::Game() : turn(0)
@@ -45,14 +60,14 @@ void Game::Update()
     std::cout << std::endl << "Units status at the beginning of the turn:" << std::endl;
 
     // Display unit status
-    for(const std::unique_ptr<Unit>& unit : unit_list)
+    for(const std::shared_ptr<Unit>& unit : unit_list)
     {
         unit->PrintInfo();
     }
     std::cout << std::endl;
 
     // Update all units
-    for(const std::unique_ptr<Unit>& unit : unit_list)
+    for(const std::shared_ptr<Unit>& unit : unit_list)
     {
         // TODO : tick all skills cooldown down
         unit->TickAllBonuses();
@@ -60,15 +75,15 @@ void Game::Update()
     }
 
     // All units cast their skills
-    for(const std::unique_ptr<Unit>& unit : unit_list)
+    for(const std::shared_ptr<Unit>& unit : unit_list)
     {
         // unit->CastAllSkills(); // TODO Later
     }
 
     // All units attack
-    for(const std::unique_ptr<Unit>& unit : unit_list)
+    for(const std::shared_ptr<Unit>& unit : unit_list)
     {
-        //unit->Attack(); // TODO
+        unit->Attack();
     }
 
     std::cout << std::endl;

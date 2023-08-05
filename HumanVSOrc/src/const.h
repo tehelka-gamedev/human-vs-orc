@@ -10,13 +10,13 @@ namespace GameConstants
     {
         BASE_HEALTH = 20,
         BASE_SHIELD = 50,
-        BASE_DAMAGE = 0, // this is raw damage without weapon
+        BASE_DAMAGE = 5, // this is raw damage without weapon
     };
 
     enum class OrcConstants
     {
         BASE_HEALTH = 60,
-        BASE_DAMAGE = 0,
+        BASE_DAMAGE = 8,
     };
 
     enum class PaladinConstants
