@@ -23,7 +23,8 @@ public:
     bool IsFull();
 
     void AddBonus(const std::shared_ptr<Bonus>& bonus);
-
+    void RemoveBonus(std::shared_ptr<Bonus>& bonus);
+    
     void Tick();
     
     // Take damage to this life component and return the amount of damage in excess

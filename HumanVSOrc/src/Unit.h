@@ -5,6 +5,7 @@
 #include "Attribute.h"
 #include "Bonus.h"
 #include "AttributeType.h"
+#include "Equipment.h"
 #include "LifeSystem.h"
 
 class Unit
@@ -39,6 +40,10 @@ public:
     // Add a bonus to the unit
     void AddBonus(const std::shared_ptr<Bonus>& bonus);
     void AddMultipleBonus(const std::vector<std::shared_ptr<Bonus>>& bonuses);
+
+    // Remove a bonus from the unit
+    void RemoveBonus(std::shared_ptr<Bonus>& bonus);
+    void RemoveMultipleBonus(std::vector<std::shared_ptr<Bonus>>& bonuses);
     
     void TakeDamage(float amount) const;
 
@@ -50,11 +55,15 @@ public:
 
     //// Equipment
     void Equip(std::shared_ptr<class EquippableItem> equippable_item);
+    // Unequip the item in the given slot, should return the item (TODO later)
+    void Unequip(Equipment::Slot equipment_slot);
     
     // Getters
     std::string GetName() const;
     float GetLifeComponentValue(AttributeType attribute_type) const;
     float GetLifeComponentMaxValue(AttributeType attribute_type) const;
+    // Returns the value of the attribute of the given type
+    // If the attribute is not found, returns std::nanf("")
     float GetAttributeValue(AttributeType attribute_type) const;
     
     // Setters

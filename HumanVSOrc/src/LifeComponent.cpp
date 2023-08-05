@@ -17,10 +17,18 @@ bool LifeComponent::IsFull()
 
 void LifeComponent::AddBonus(const std::shared_ptr<Bonus>& bonus)
 {
-    // Unsure yet how to handle the change of current life...
-    //const float previous_max_value = max_value.GetValue();
     max_value.AddBonus(bonus);
-    //value += max_value.GetValue() - previous_max_value;
+    // current value is not changed (as it get weird when you equip then unequip an item)
+}
+
+void LifeComponent::RemoveBonus(std::shared_ptr<Bonus>& bonus)
+{
+    max_value.RemoveBonus(bonus);
+    // cap the current value to the new max value
+    if (value > max_value.GetValue())
+    {
+        value = max_value.GetValue();
+    }
 }
 
 void LifeComponent::Tick()

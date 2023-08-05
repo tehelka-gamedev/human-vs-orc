@@ -94,6 +94,36 @@ void Unit::AddMultipleBonus(const std::vector<std::shared_ptr<Bonus>>& bonuses)
     }
 }
 
+void Unit::RemoveBonus(std::shared_ptr<Bonus>& bonus)
+{
+    AttributeType attribute_type = bonus->GetTargetAttribute();
+    // If the attribute is not present, do something
+    if (!HasAttribute(attribute_type))
+    {
+        std::cout << "Attribute of type " << static_cast<int>(attribute_type) <<
+            " not present" << std::endl;
+        return;
+    }
+    // remove the bonus
+    // if the attribute type is in the map, remove the bonus from the attribute
+    if (attributes.find(attribute_type) != attributes.end())
+    {
+        attributes[attribute_type]->RemoveBonus(bonus);
+    }
+    else if (life_system->HasComponent(attribute_type))
+    {
+        life_system->RemoveBonus(bonus);
+    }
+}
+
+void Unit::RemoveMultipleBonus(std::vector<std::shared_ptr<Bonus>>& bonuses)
+{
+    for (std::shared_ptr<Bonus>& bonus : bonuses)
+    {
+        RemoveBonus(bonus);
+    }
+}
+
 void Unit::TakeDamage(float amount) const
 {
     life_system->TakeDamage(amount);
@@ -122,6 +152,13 @@ void Unit::Equip(std::shared_ptr<EquippableItem> equippable_item)
     equipment->EquipItem(equippable_item, equippable_item->GetSlot());
 }
 
+void Unit::Unequip(Equipment::Slot equipment_slot)
+{
+    std::shared_ptr<EquippableItem> item = equipment->UnequipSlot(equipment_slot);
+    std::vector<std::shared_ptr<Bonus>> bonuses = item->GetBonusesByReference();
+    RemoveMultipleBonus(bonuses);
+}
+
 std::string Unit::GetName() const
 {
     return name;
@@ -139,7 +176,14 @@ float Unit::GetLifeComponentMaxValue(AttributeType attribute_type) const
 
 float Unit::GetAttributeValue(AttributeType attribute_type) const
 {
-    return attributes.at(attribute_type)->GetValue();
+    auto attribute = attributes.find(attribute_type);
+    if (attribute != attributes.end())
+    {
+        return attribute->second->GetValue();
+    }
+    
+    return std::numeric_limits<float>::quiet_NaN();
+    
 }
 
 void Unit::SetName(const std::string& new_name)

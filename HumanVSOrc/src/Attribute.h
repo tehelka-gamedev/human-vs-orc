@@ -5,8 +5,7 @@
 
 #include "AttributeType.h"
 
-// TODO : refactor this class to use pointers to bonuses instead of copying them
-// As they will be created outside of the attribute class, it will be easier to manage them.
+
 class Attribute
 {
     // Attributes
@@ -21,6 +20,11 @@ private:
     bool is_dirty = true; // If true, the final value needs to be recalculated.
 
     float CalculateFinalValue();
+
+    void AddRawBonus(const std::shared_ptr<Bonus>& bonus);
+    void AddFinalBonus(const std::shared_ptr<Bonus>& bonus);
+    void RemoveRawBonus(std::shared_ptr<Bonus>& bonus);
+    void RemoveFinalBonus(std::shared_ptr<Bonus>& bonus);
 public:
     Attribute(AttributeType attribute_type, const std::string& name, float value);
     ~Attribute();
@@ -28,11 +32,6 @@ public:
     void AddBonus(const std::shared_ptr<Bonus>& bonus);
     void RemoveBonus(std::shared_ptr<Bonus>& bonus);
     
-    // TODO : set this to private
-    void AddRawBonus(const std::shared_ptr<Bonus>& bonus);
-    void AddFinalBonus(const std::shared_ptr<Bonus>& bonus);
-    void RemoveRawBonus(std::shared_ptr<Bonus>& bonus);
-    void RemoveFinalBonus(std::shared_ptr<Bonus>& bonus);
 
     void Tick(); // Decrease the time left of all bonuses by 1.
 

@@ -21,6 +21,8 @@ public:
     // Iterate over all components and add the bonus to the first
     // component that matches the bonus target attribute
     void AddBonus(const std::shared_ptr<class Bonus>& bonus);
+    void RemoveBonus(std::shared_ptr<class Bonus>& bonus);
+    
     bool HasComponent(enum class AttributeType attribute_type) const;
 
     void Tick();
@@ -35,7 +37,7 @@ public:
     void AddComponent(enum class AttributeType attribute_type, const std::string& display_name, float max_value);
 
     // Get a component value or max value, given its name
-    // If the component does not exist, return -1
+    // If the component does not exist, return std::nanf("")
     float GetComponentValue(AttributeType attribute_type) const;
     float GetComponentMaxValue(AttributeType attribute_type) const;
     

@@ -62,7 +62,7 @@ TEST_F(TestUnit, TestTakeDamageThenBonus)
   // Take 75 damage
   // Check that the unit has 25 health left
   // Give it a bonus of 50 health
-  // Check that the unit has 25 health left
+  // Check that the unit has 25 health left and 150 max health
   unit.AddLifeComponent(AttributeType::HEALTH,  "health", 100);
   unit.TakeDamage(75);
   EXPECT_FLOAT_EQ(unit.GetLifeComponentValue(AttributeType::HEALTH), 25);

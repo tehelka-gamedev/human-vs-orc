@@ -10,7 +10,7 @@ public:
     enum class Slot
     {
         WEAPON,
-        ARMOR,
+        CHEST,
         SHIELD,
         HELMET,
         BOOTS,
@@ -35,6 +35,7 @@ public:
     
     // Setters
     void EquipItem(std::shared_ptr<EquippableItem> item, Slot slot);
+    std::shared_ptr<EquippableItem> UnequipSlot(Slot slot);
     
     // Methods
     void Print() const;

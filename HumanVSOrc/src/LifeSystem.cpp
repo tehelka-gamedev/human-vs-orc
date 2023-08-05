@@ -27,6 +27,19 @@ void LifeSystem::AddBonus(const std::shared_ptr<Bonus>& bonus)
     }
 }
 
+void LifeSystem::RemoveBonus(std::shared_ptr<Bonus>& bonus)
+{
+    // Iterate over all components and remove the bonus from the first component that matches the bonus target attribute
+    for(std::unique_ptr<LifeComponent>& component : components)
+    {
+        if(component->GetAttributeType() == bonus->GetTargetAttribute())
+        {
+            component->RemoveBonus(bonus);
+            break;
+        }
+    }
+}
+
 
 bool LifeSystem::HasComponent(AttributeType attribute_type) const
 {
@@ -87,7 +100,7 @@ float LifeSystem::GetComponentValue(const AttributeType attribute_type) const
             return component->GetValue();
         }
     }
-    return -1;
+    return std::numeric_limits<float>::quiet_NaN();
 }
 
 float LifeSystem::GetComponentMaxValue(const AttributeType attribute_type) const
@@ -99,7 +112,7 @@ float LifeSystem::GetComponentMaxValue(const AttributeType attribute_type) const
             return component->GetMaxValue();
         }
     }
-    return -1;
+    return std::numeric_limits<float>::quiet_NaN();
 }
 
 

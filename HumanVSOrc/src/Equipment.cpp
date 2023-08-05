@@ -19,6 +19,14 @@ void Equipment::EquipItem(std::shared_ptr<EquippableItem> item, Slot slot)
     equipped_items[static_cast<int>(slot)] = item;
 }
 
+std::shared_ptr<EquippableItem> Equipment::UnequipSlot(Slot slot)
+{
+    std::shared_ptr<EquippableItem> item = equipped_items[static_cast<int>(slot)];
+    std::cerr << "Unequip slot " << static_cast<int>(slot) << std::endl;
+    equipped_items[static_cast<int>(slot)] = nullptr;
+    return item;
+}
+
 void Equipment::Print() const
 {   
     for (int i = 0; i < static_cast<int>(Slot::COUNT); ++i)

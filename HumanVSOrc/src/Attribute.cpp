@@ -15,10 +15,11 @@ float Attribute::CalculateFinalValue()
         final_value += b->GetValue();
         raw_multiplier += b->GetMultiplier();
     }
-
+    // std::cout << "final value after raw bonuses : " << final_value << "\n";
     // add the raw multiplier bonus to the buffed base attribute value
     final_value *= (1 + raw_multiplier);
-
+    // std::cout << "final value after raw multiplier : " << final_value << "\n";
+    
     // All final bonuses are computed and added to the final attribute value.
     float final_multiplier = 0;
     for (std::shared_ptr<Bonus>& b: final_bonus)
