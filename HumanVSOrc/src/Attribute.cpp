@@ -170,3 +170,8 @@ void Attribute::SetBaseValue(float new_value)
 {
     base_value = new_value;
 }
+
+void Attribute::PrintInfo()
+{
+    std::cout << "Attribute " << display_name << " : " << GetValue() << std::endl;
+}

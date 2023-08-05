@@ -42,6 +42,8 @@ public:
 
     // Setters
     void SetBaseValue(float new_value);
-    
+
+    // Print info for debugging
+    void PrintInfo();
     
 };

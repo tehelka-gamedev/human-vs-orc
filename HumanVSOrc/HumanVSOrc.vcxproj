@@ -161,7 +161,9 @@
     <ClCompile Include="HumanVSOrc.cpp" />
     <ClCompile Include="src\Attribute.cpp" />
     <ClCompile Include="src\Bonus.cpp" />
+    <ClCompile Include="src\Equipment.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\EquippableItem.cpp" />
     <ClCompile Include="src\LifeComponent.cpp" />
     <ClCompile Include="src\LifeSystem.cpp" />
     <ClCompile Include="src\Unit.cpp" />
@@ -172,7 +174,9 @@
     <ClInclude Include="src\Bonus.h" />
     <ClInclude Include="src\AttributeType.h" />
     <ClInclude Include="src\const.h" />
+    <ClInclude Include="src\Equipment.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\EquippableItem.h" />
     <ClInclude Include="src\LifeComponent.h" />
     <ClInclude Include="src\LifeSystem.h" />
     <ClInclude Include="src\RandomGenerator.h" />

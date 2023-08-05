@@ -16,6 +16,9 @@ private:
     std::map<AttributeType, std::unique_ptr<Attribute> > attributes = {};
     
     std::weak_ptr<Unit> target;
+
+    std::unique_ptr<class Equipment> equipment;
+    
 public:
     explicit Unit(std::string name);
     ~Unit();
@@ -35,6 +38,7 @@ public:
     // but may be private later
     // Add a bonus to the unit
     void AddBonus(const std::shared_ptr<Bonus>& bonus);
+    void AddMultipleBonus(const std::vector<std::shared_ptr<Bonus>>& bonuses);
     
     void TakeDamage(float amount) const;
 
@@ -43,6 +47,9 @@ public:
     // For each attribute, Tick() all bonuses contained in the attributes
     // that are either in the map or in the life system
     void TickAllBonuses();
+
+    //// Equipment
+    void Equip(std::shared_ptr<class EquippableItem> equippable_item);
     
     // Getters
     std::string GetName() const;
@@ -56,6 +63,7 @@ public:
 
     // Debug function to print the unit info
     void PrintInfo() const;
+    void PrintAttributes() const;
 
     
 };

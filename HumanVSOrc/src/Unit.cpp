@@ -2,9 +2,10 @@
 
 #include <iostream>
 
+#include "Equipment.h"
+#include "EquippableItem.h"
 
-
-Unit::Unit(std::string name) : name(std::move(name)), life_system(std::make_unique<LifeSystem>())
+Unit::Unit(std::string name) : name(std::move(name)), life_system(std::make_unique<LifeSystem>()), equipment(std::make_unique<Equipment>())
 {
 }
 
@@ -85,6 +86,14 @@ void Unit::AddBonus(const std::shared_ptr<Bonus>& bonus)
     
 }
 
+void Unit::AddMultipleBonus(const std::vector<std::shared_ptr<Bonus>>& bonuses)
+{
+    for (const auto& bonus : bonuses)
+    {
+        AddBonus(bonus);
+    }
+}
+
 void Unit::TakeDamage(float amount) const
 {
     life_system->TakeDamage(amount);
@@ -102,6 +111,15 @@ void Unit::TickAllBonuses()
         attribute.second->Tick();
     }
     life_system->Tick();
+}
+
+void Unit::Equip(std::shared_ptr<EquippableItem> equippable_item)
+{
+    // TODO : if already item in this slot, unequip it first
+    // ...
+
+    AddMultipleBonus(equippable_item->GetBonusesByReference());
+    equipment->EquipItem(equippable_item, equippable_item->GetSlot());
 }
 
 std::string Unit::GetName() const
@@ -138,5 +156,14 @@ void Unit::PrintInfo() const
 {   
     std::cout << "Unit name: " << name << std::endl;
     life_system->PrintComponents();
+    PrintAttributes();
     std::cout << std::endl;
+}
+
+void Unit::PrintAttributes() const
+{
+    for (auto& attribute : attributes)
+    {
+        attribute.second->PrintInfo();
+    }
 }

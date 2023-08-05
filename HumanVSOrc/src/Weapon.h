@@ -17,5 +17,4 @@ public:
 
     // Getters
     std::string GetName() const;
-    std::shared_ptr<Bonus>&  GetDamageBonus();
 };

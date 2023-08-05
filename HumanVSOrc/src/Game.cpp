@@ -22,6 +22,7 @@ void Game::CreateUnits()
 
     // Add Health and damage attributes to the units
     unit_list[0]->AddLifeComponent(AttributeType::HEALTH, "Health", static_cast<float>(GameConstants::KnightConstants::BASE_HEALTH));
+    unit_list[0]->AddLifeComponent(AttributeType::SHIELD, "Shield", static_cast<float>(GameConstants::KnightConstants::BASE_SHIELD));
     unit_list[0]->AddAttribute(AttributeType::DAMAGE, "Damage", static_cast<float>(GameConstants::KnightConstants::BASE_DAMAGE));
 
     unit_list[1]->AddLifeComponent(AttributeType::HEALTH, "Health", static_cast<float>(GameConstants::OrcConstants::BASE_HEALTH));
