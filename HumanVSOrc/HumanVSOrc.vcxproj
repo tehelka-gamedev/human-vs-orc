@@ -166,6 +166,8 @@
     <ClCompile Include="src\EquippableItem.cpp" />
     <ClCompile Include="src\LifeComponent.cpp" />
     <ClCompile Include="src\LifeSystem.cpp" />
+    <ClCompile Include="src\Skill\Command.cpp" />
+    <ClCompile Include="src\Skill\DealDamageCommand.cpp" />
     <ClCompile Include="src\Unit.cpp" />
     <ClCompile Include="src\Weapon.cpp" />
   </ItemGroup>
@@ -180,6 +182,8 @@
     <ClInclude Include="src\LifeComponent.h" />
     <ClInclude Include="src\LifeSystem.h" />
     <ClInclude Include="src\RandomGenerator.h" />
+    <ClInclude Include="src\Skill\Command.h" />
+    <ClInclude Include="src\Skill\DealDamageCommand.h" />
     <ClInclude Include="src\Unit.h" />
     <ClInclude Include="src\Weapon.h" />
   </ItemGroup>

@@ -8,7 +8,7 @@
 #include "Equipment.h"
 #include "LifeSystem.h"
 
-class Unit
+class Unit : public std::enable_shared_from_this<Unit>
 {
     // Attributes
 private:

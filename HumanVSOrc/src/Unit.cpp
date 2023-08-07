@@ -4,6 +4,7 @@
 
 #include "Equipment.h"
 #include "EquippableItem.h"
+#include "Skill/DealDamageCommand.h"
 
 Unit::Unit(std::string name) : name(std::move(name)), life_system(std::make_unique<LifeSystem>()), equipment(std::make_unique<Equipment>())
 {
@@ -14,22 +15,26 @@ Unit::~Unit()
 
 void Unit::Attack()
 {
-    // If no Damage attribute, cannot attack
-    if (!HasAttribute(AttributeType::DAMAGE))
-    {
-        std::cout << "Unit " << name << " tried to attack but has no damage attribute" << std::endl;
-        return;
-    }
-    
-    std::shared_ptr<Unit> target_ptr = target.lock();
-    if (!target_ptr)
-    {
-        std::cout << "Unit " << name << " tried to attack but has no target" << std::endl;
-        return;
-    }
+    // // If no Damage attribute, cannot attack
+    // if (!HasAttribute(AttributeType::DAMAGE))
+    // {
+    //     std::cout << "Unit " << name << " tried to attack but has no damage attribute" << std::endl;
+    //     return;
+    // }
+    //
+    // std::shared_ptr<Unit> target_ptr = target.lock();
+    // if (!target_ptr)
+    // {
+    //     std::cout << "Unit " << name << " tried to attack but has no target" << std::endl;
+    //     return;
+    // }
+    //
+    // std::cout << name << " attacks " << target_ptr->name << std::endl;
+    // target_ptr->TakeDamage(GetAttributeValue(AttributeType::DAMAGE));
 
-    std::cout << name << " attacks " << target_ptr->name << std::endl;
-    target_ptr->TakeDamage(GetAttributeValue(AttributeType::DAMAGE));
+    // Create a DealDamageCommand and execute it
+    Skill::DealDamageCommand deal_damage_command(GetAttributeValue(AttributeType::DAMAGE));
+    deal_damage_command.Execute(std::weak_ptr<Unit>(shared_from_this()), target);
 }
 
 bool Unit::HasAttribute(AttributeType attribute_type) const
