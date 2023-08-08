@@ -3,13 +3,12 @@
 #include <iostream>
 #include "../Unit.h"
 
-namespace Skill
+namespace Skills
 {
     DealDamageCommand::DealDamageCommand(float damage_amount) : damage_amount(damage_amount)
     {
     }
 
-    DealDamageCommand::~DealDamageCommand() = default;
     
     void DealDamageCommand::Execute(std::weak_ptr<Unit> caster, std::weak_ptr<Unit> target)
     {

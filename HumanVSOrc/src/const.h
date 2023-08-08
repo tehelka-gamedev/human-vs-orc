@@ -33,6 +33,21 @@ namespace GameConstants
 
 
     //// Skills
-    /// TODO later when skills are implemented
+    namespace Skills
+    {
+        enum class Charge
+        {
+            COOLDOWN = 3,
+            SUCCESS_RATE = 60, // 60%
+            DURATION = 1,
+        };
+
+        enum class Stun
+        {
+            COOLDOWN = 5,
+            SUCCESS_RATE = 20, // 20%
+            DURATION = 1,
+        };
+    }
  
 }

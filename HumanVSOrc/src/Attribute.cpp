@@ -129,7 +129,7 @@ void Attribute::Tick()
     }
     raw_bonus.erase(it,  raw_bonus.end());
 
-    for (std::shared_ptr<Bonus>& b: raw_bonus)
+    for (std::shared_ptr<Bonus>& b: final_bonus)
     {
         b->Tick();
     }

@@ -5,6 +5,8 @@
 
 #include "Unit.h"
 #include "const.h"
+#include "Skill/SkillFactory.h"
+#include "Skill/Skill.h"
 
 void Game::Init()
 {
@@ -27,6 +29,12 @@ void Game::CreateUnits()
 
     unit_list[1]->AddLifeComponent(AttributeType::HEALTH, "Health", static_cast<float>(GameConstants::OrcConstants::BASE_HEALTH));
     unit_list[1]->AddAttribute(AttributeType::DAMAGE, "Damage", static_cast<float>(GameConstants::OrcConstants::BASE_DAMAGE));
+
+    // Add skills to the units
+    // Charge to the human
+    // and Stun to the orc
+    unit_list[0]->AddSkill(Skills::SkillFactory::CreateChargeSkill());
+    unit_list[1]->AddSkill(Skills::SkillFactory::CreateStunSkill());
 }
 
 Game::Game() : turn(0)
@@ -70,7 +78,7 @@ void Game::Update()
     // Update all units
     for(const std::shared_ptr<Unit>& unit : unit_list)
     {
-        // TODO : tick all skills cooldown down
+        unit->TickAllSkills();
         unit->TickAllBonuses();
         // TODO : update status effects
     }
@@ -78,7 +86,7 @@ void Game::Update()
     // All units cast their skills
     for(const std::shared_ptr<Unit>& unit : unit_list)
     {
-        // unit->CastAllSkills(); // TODO Later
+        unit->CastAllSkills();
     }
 
     // All units attack

@@ -5,6 +5,7 @@
 #include "Equipment.h"
 #include "EquippableItem.h"
 #include "Skill/DealDamageCommand.h"
+#include "Skill/Skill.h"
 
 Unit::Unit(std::string name) : name(std::move(name)), life_system(std::make_unique<LifeSystem>()), equipment(std::make_unique<Equipment>())
 {
@@ -33,7 +34,7 @@ void Unit::Attack()
     // target_ptr->TakeDamage(GetAttributeValue(AttributeType::DAMAGE));
 
     // Create a DealDamageCommand and execute it
-    Skill::DealDamageCommand deal_damage_command(GetAttributeValue(AttributeType::DAMAGE));
+    Skills::DealDamageCommand deal_damage_command(GetAttributeValue(AttributeType::DAMAGE));
     deal_damage_command.Execute(std::weak_ptr<Unit>(shared_from_this()), target);
 }
 
@@ -139,7 +140,7 @@ bool Unit::IsAlive() const
     return !life_system->IsDepleted();
 }
 
-void Unit::TickAllBonuses()
+void Unit::TickAllBonuses() const
 {   
     for (auto& attribute : attributes)
     {
@@ -162,6 +163,28 @@ void Unit::Unequip(Equipment::Slot equipment_slot)
     std::shared_ptr<EquippableItem> item = equipment->UnequipSlot(equipment_slot);
     std::vector<std::shared_ptr<Bonus>> bonuses = item->GetBonusesByReference();
     RemoveMultipleBonus(bonuses);
+}
+
+void Unit::AddSkill(std::unique_ptr<Skills::Skill> skill)
+{
+    skills.push_back(std::move(skill));
+}
+
+void Unit::CastAllSkills()
+{
+    const std::weak_ptr<Unit> caster(shared_from_this());
+    for (const std::unique_ptr<Skills::Skill>& skill : skills)
+    {
+        skill->Execute(caster, target);
+    }
+}
+
+void Unit::TickAllSkills() const
+{
+    for (const std::unique_ptr<Skills::Skill>& skill : skills)
+    {
+        skill->Tick();
+    }
 }
 
 std::string Unit::GetName() const

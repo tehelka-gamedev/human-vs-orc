@@ -5,7 +5,7 @@
 
 class Unit;
 
-namespace Skill
+namespace Skills
 {
     // Command is the base class for all commands.
     // It is used to implement the Command design pattern.

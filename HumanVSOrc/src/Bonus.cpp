@@ -1,5 +1,7 @@
 ﻿#include "Bonus.h"
 
+#include <iostream>
+
 Bonus::Bonus(float value, float multiplier, AttributeType attribute_to_target, Type bonus_type, int time_left) : value(value), multiplier(multiplier), target_attribute(attribute_to_target), time_left(time_left), bonus_type(bonus_type)
 {
 }

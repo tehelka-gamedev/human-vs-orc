@@ -8,6 +8,15 @@
 #include "Equipment.h"
 #include "LifeSystem.h"
 
+
+namespace Skills
+{
+    class Skill;
+}
+
+class EquippableItem;
+class Equipment;
+
 class Unit : public std::enable_shared_from_this<Unit>
 {
     // Attributes
@@ -18,7 +27,9 @@ private:
     
     std::weak_ptr<Unit> target;
 
-    std::unique_ptr<class Equipment> equipment;
+    std::unique_ptr<Equipment> equipment;
+
+    std::vector<std::unique_ptr<Skills::Skill>> skills;
     
 public:
     explicit Unit(std::string name);
@@ -51,12 +62,20 @@ public:
 
     // For each attribute, Tick() all bonuses contained in the attributes
     // that are either in the map or in the life system
-    void TickAllBonuses();
+    void TickAllBonuses() const;
 
     //// Equipment
-    void Equip(std::shared_ptr<class EquippableItem> equippable_item);
+    void Equip(std::shared_ptr<EquippableItem> equippable_item);
     // Unequip the item in the given slot, should return the item (TODO later)
     void Unequip(Equipment::Slot equipment_slot);
+
+
+    //// Skills
+    // Add a skill to the unit
+    void AddSkill(std::unique_ptr<Skills::Skill> skill);
+    // Cast all skills
+    void CastAllSkills();
+    void TickAllSkills() const;
     
     // Getters
     std::string GetName() const;
