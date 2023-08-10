@@ -1,11 +1,14 @@
 ﻿#include "Unit.h"
 
+#include <algorithm>
 #include <iostream>
 
 #include "Equipment.h"
 #include "EquippableItem.h"
 #include "Skill/DealDamageCommand.h"
 #include "Skill/Skill.h"
+
+#include "Skill/StatusEffect.h"
 
 Unit::Unit(std::string name) : name(std::move(name)), life_system(std::make_unique<LifeSystem>()), equipment(std::make_unique<Equipment>())
 {
@@ -33,6 +36,13 @@ void Unit::Attack()
     // std::cout << name << " attacks " << target_ptr->name << std::endl;
     // target_ptr->TakeDamage(GetAttributeValue(AttributeType::DAMAGE));
 
+    // If the unit is stunned, do nothing
+    if(HasStatusEffect(Skills::StatusEffect::Type::STUNNED))
+    {
+        std::cout << name << " is stunned and cannot attack" << std::endl;
+        return;
+    }
+    
     // Create a DealDamageCommand and execute it
     Skills::DealDamageCommand deal_damage_command(GetAttributeValue(AttributeType::DAMAGE));
     deal_damage_command.Execute(std::weak_ptr<Unit>(shared_from_this()), target);
@@ -172,6 +182,13 @@ void Unit::AddSkill(std::unique_ptr<Skills::Skill> skill)
 
 void Unit::CastAllSkills()
 {
+    // If the unit is stunned, do nothing
+    if (HasStatusEffect(Skills::StatusEffect::Type::STUNNED))
+    {
+        std::cout << "Unit " << name << " is stunned and cannot cast skills" << std::endl;
+        return;
+    }
+    
     const std::weak_ptr<Unit> caster(shared_from_this());
     for (const std::unique_ptr<Skills::Skill>& skill : skills)
     {
@@ -185,6 +202,37 @@ void Unit::TickAllSkills() const
     {
         skill->Tick();
     }
+}
+
+void Unit::AddStatusEffect(std::unique_ptr<Skills::StatusEffect> status_effect)
+{   
+    // TODO : if already status effect of this type, do something
+    status_effects.push_back(std::move(status_effect));
+    
+}
+
+void Unit::TickAllStatusEffects()
+{
+    for (const std::unique_ptr<Skills::StatusEffect>& status_effect : status_effects)
+    {
+        status_effect->Tick();
+    }
+    
+    // remove all status effects that are over
+    auto it = std::remove_if(
+        status_effects.begin(),
+        status_effects.end(),
+        [](const std::unique_ptr<Skills::StatusEffect>& status) { return status->IsOver(); });
+
+    status_effects.erase(it, status_effects.end());
+}
+
+bool Unit::HasStatusEffect(Skills::StatusEffect::Type status_effect_type) const
+{
+    return std::any_of(
+        status_effects.begin(),
+        status_effects.end(),
+        [status_effect_type](const std::unique_ptr<Skills::StatusEffect>& status) { return status->GetType() == status_effect_type; });
 }
 
 std::string Unit::GetName() const

@@ -80,7 +80,7 @@ void Game::Update()
     {
         unit->TickAllSkills();
         unit->TickAllBonuses();
-        // TODO : update status effects
+        unit->TickAllStatusEffects();
     }
 
     // All units cast their skills

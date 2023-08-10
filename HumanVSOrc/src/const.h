@@ -45,7 +45,7 @@ namespace GameConstants
         enum class Stun
         {
             COOLDOWN = 5,
-            SUCCESS_RATE = 20, // 20%
+            SUCCESS_RATE = 100, // 20%
             DURATION = 1,
         };
     }

@@ -7,11 +7,13 @@
 #include "AttributeType.h"
 #include "Equipment.h"
 #include "LifeSystem.h"
+#include "Skill/StatusEffect.h"
 
 
 namespace Skills
 {
     class Skill;
+    class StatusEffect;
 }
 
 class EquippableItem;
@@ -30,6 +32,7 @@ private:
     std::unique_ptr<Equipment> equipment;
 
     std::vector<std::unique_ptr<Skills::Skill>> skills;
+    std::vector<std::unique_ptr<Skills::StatusEffect>> status_effects;
     
 public:
     explicit Unit(std::string name);
@@ -76,6 +79,14 @@ public:
     // Cast all skills
     void CastAllSkills();
     void TickAllSkills() const;
+
+    //// Status effects
+    // Add a status effect to the unit
+    void AddStatusEffect(std::unique_ptr<Skills::StatusEffect> status_effect);
+    // Tick all status effects
+    void TickAllStatusEffects();
+    // Returns true if the unit has a status effect of the given type
+    bool HasStatusEffect(Skills::StatusEffect::Type status_effect_type) const;
     
     // Getters
     std::string GetName() const;

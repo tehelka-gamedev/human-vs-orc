@@ -167,10 +167,12 @@
     <ClCompile Include="src\LifeComponent.cpp" />
     <ClCompile Include="src\LifeSystem.cpp" />
     <ClCompile Include="src\Skill\ApplyBonusToCasterCommand.cpp" />
+    <ClCompile Include="src\Skill\ApplyStatusEffectCommand.cpp" />
     <ClCompile Include="src\Skill\Command.cpp" />
     <ClCompile Include="src\Skill\DealDamageCommand.cpp" />
     <ClCompile Include="src\Skill\Skill.cpp" />
     <ClCompile Include="src\Skill\SkillFactory.cpp" />
+    <ClCompile Include="src\Skill\StatusEffect.cpp" />
     <ClCompile Include="src\Unit.cpp" />
     <ClCompile Include="src\Weapon.cpp" />
   </ItemGroup>
@@ -186,10 +188,12 @@
     <ClInclude Include="src\LifeSystem.h" />
     <ClInclude Include="src\RandomGenerator.h" />
     <ClInclude Include="src\Skill\ApplyBonusToCasterCommand.h" />
+    <ClInclude Include="src\Skill\ApplyStatusEffectCommand.h" />
     <ClInclude Include="src\Skill\Command.h" />
     <ClInclude Include="src\Skill\DealDamageCommand.h" />
     <ClInclude Include="src\Skill\Skill.h" />
     <ClInclude Include="src\Skill\SkillFactory.h" />
+    <ClInclude Include="src\Skill\StatusEffect.h" />
     <ClInclude Include="src\Unit.h" />
     <ClInclude Include="src\Weapon.h" />
   </ItemGroup>
