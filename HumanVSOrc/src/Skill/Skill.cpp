@@ -57,5 +57,25 @@ namespace Skills
         std::cout << "Skill " << name << " casted!" << std::endl;
         command->Execute(std::move(caster), std::move(target));
     }
-    
+
+    int Skill::GetCooldown() const
+    {
+        return cooldown;
+    }
+
+    int Skill::GetCurrentCooldown() const
+    {
+        return current_cooldown;
+    }
+
+    void Skill::SetSuccessRate(float rate)
+    {
+        if (rate < 0.0f || rate > 1.0f)
+        {
+            throw std::invalid_argument(
+            "You cannot set the success rate of skill '" + this->name + "' to " + std::to_string(rate)
+        + ". It must be between 0.0 and 1.0.");
+        }
+        success_rate = rate;
+    }
 }

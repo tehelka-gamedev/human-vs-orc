@@ -21,11 +21,15 @@ protected:
     std::unique_ptr<Attribute> attribute;
 };
 
+
+
 // Test that attributes are correctly initialized
 TEST_F(TestAttributes, TestInitialisation)
 {
     EXPECT_FLOAT_EQ(attribute->GetValue(), 10);
 }
+
+
 
 // Test that attributes raw bonuses are correctly applied
 TEST_F(TestAttributes, TestRawBonus)

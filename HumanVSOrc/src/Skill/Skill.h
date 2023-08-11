@@ -24,7 +24,15 @@ namespace Skills
         // Reduce the cooldown by 1
         void Tick();
 
+        
         bool IsReady() const;
         void Execute(std::weak_ptr<Unit> caster, std::weak_ptr<Unit> target);
+
+        // Getters
+        int GetCooldown() const;
+        int GetCurrentCooldown() const;
+
+        // Setters
+        void SetSuccessRate(float rate);
     };
 }

@@ -14,28 +14,12 @@ Unit::Unit(std::string name) : name(std::move(name)), life_system(std::make_uniq
 {
 }
 
+
 Unit::~Unit()
 = default;
 
 void Unit::Attack()
 {
-    // // If no Damage attribute, cannot attack
-    // if (!HasAttribute(AttributeType::DAMAGE))
-    // {
-    //     std::cout << "Unit " << name << " tried to attack but has no damage attribute" << std::endl;
-    //     return;
-    // }
-    //
-    // std::shared_ptr<Unit> target_ptr = target.lock();
-    // if (!target_ptr)
-    // {
-    //     std::cout << "Unit " << name << " tried to attack but has no target" << std::endl;
-    //     return;
-    // }
-    //
-    // std::cout << name << " attacks " << target_ptr->name << std::endl;
-    // target_ptr->TakeDamage(GetAttributeValue(AttributeType::DAMAGE));
-
     // If the unit is stunned, do nothing
     if(HasStatusEffect(Skills::StatusEffect::Type::STUNNED))
     {

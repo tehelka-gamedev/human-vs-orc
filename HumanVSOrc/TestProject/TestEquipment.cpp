@@ -134,3 +134,10 @@ TEST_F(TestEquipment, TestEquipAll)
     EXPECT_FLOAT_EQ(unit.GetAttributeValue(AttributeType::ARMOR), armor);
     EXPECT_FLOAT_EQ(unit.GetLifeComponentMaxValue(AttributeType::HEALTH), health);
 }
+
+// Dummy test method
+// TEST_F(TestEquipment, TestDummy)
+// {
+//     EquippableItem op_sword{"sword", Equipment::Slot::WEAPON};
+//     EXPECT_EQ(1, 1);
+// }
