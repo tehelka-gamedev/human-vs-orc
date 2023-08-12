@@ -7,7 +7,7 @@
 #include "../src/const.h"
 #include "../src/Skill/SkillFactory.h"
 
-using namespace Skills;
+using namespace skills;
 
 class TestSkill : public ::testing::Test
 {

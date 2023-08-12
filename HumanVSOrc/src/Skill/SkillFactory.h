@@ -3,7 +3,7 @@
 
 class Bonus;
 
-namespace Skills
+namespace skills
 {
     class Skill;
     

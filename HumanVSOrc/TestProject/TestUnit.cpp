@@ -110,7 +110,7 @@ TEST_F(TestUnit, TestStun)
   
   unit->SetTarget(target);
 
-  unit->AddStatusEffect(std::make_unique<Skills::StatusEffect>("Stun", 1, Skills::StatusEffect::Type::STUNNED));
+  unit->AddStatusEffect(std::make_unique<skills::StatusEffect>("Stun", 1, skills::StatusEffect::Type::STUNNED));
   
   unit->Attack();
   EXPECT_FLOAT_EQ(target->GetLifeComponentValue(AttributeType::HEALTH), target_health);
@@ -120,23 +120,23 @@ TEST_F(TestUnit, TestStun)
 // Test the Unit::TickAllStatusEffects method
 TEST_F(TestUnit, TestTickAllStatusEffects)
 {
-  unit->AddStatusEffect(std::make_unique<Skills::StatusEffect>("Stun", 1, Skills::StatusEffect::Type::STUNNED));
-  unit->AddStatusEffect(std::make_unique<Skills::StatusEffect>("Bleed", 2, Skills::StatusEffect::Type::BLEEDING));
+  unit->AddStatusEffect(std::make_unique<skills::StatusEffect>("Stun", 1, skills::StatusEffect::Type::STUNNED));
+  unit->AddStatusEffect(std::make_unique<skills::StatusEffect>("Bleed", 2, skills::StatusEffect::Type::BLEEDING));
 
 
-  EXPECT_EQ(unit->HasStatusEffect(Skills::StatusEffect::Type::STUNNED), true);
-  EXPECT_EQ(unit->HasStatusEffect(Skills::StatusEffect::Type::BLEEDING), true);
+  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::STUNNED), true);
+  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::BLEEDING), true);
   
   unit->TickAllStatusEffects();
 
   // Test the unit has no stun but still bleeding
-  EXPECT_EQ(unit->HasStatusEffect(Skills::StatusEffect::Type::STUNNED), false);
-  EXPECT_EQ(unit->HasStatusEffect(Skills::StatusEffect::Type::BLEEDING), true);
+  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::STUNNED), false);
+  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::BLEEDING), true);
 
   // Tick again to remove the bleed
   unit->TickAllStatusEffects();
-  EXPECT_EQ(unit->HasStatusEffect(Skills::StatusEffect::Type::STUNNED), false);
-  EXPECT_EQ(unit->HasStatusEffect(Skills::StatusEffect::Type::BLEEDING), false);
+  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::STUNNED), false);
+  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::BLEEDING), false);
   
 
   
@@ -149,10 +149,10 @@ TEST_F(TestUnit, TestCastAllSkills)
   float target_health = target->GetLifeComponentValue(AttributeType::HEALTH);
   
   // Create a skill that does 10 damage
-  unit->AddSkill(std::make_unique<Skills::Skill>("Skill1", 5, 1.0f, std::make_unique<Skills::DealDamageCommand>(10.0f)));
+  unit->AddSkill(std::make_unique<skills::Skill>("Skill1", 5, 1.0f, std::make_unique<skills::DealDamageCommand>(10.0f)));
 
   // Create another skill that does 20 damage
-  unit->AddSkill(std::make_unique<Skills::Skill>("Skill2", 5, 1.0f, std::make_unique<Skills::DealDamageCommand>(20.0f)));
+  unit->AddSkill(std::make_unique<skills::Skill>("Skill2", 5, 1.0f, std::make_unique<skills::DealDamageCommand>(20.0f)));
   
   unit->SetTarget(target);
 

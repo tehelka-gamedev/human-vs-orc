@@ -2,9 +2,9 @@
 #include <memory>
 #include <string>
 
-class Unit;
+class ITargetable;
 
-namespace Skills
+namespace skills
 {
     class Command;
     
@@ -28,8 +28,8 @@ namespace Skills
 
         // Note: the caster and target are not used in the current implementation
         // TODO: define these attributes
-        std::weak_ptr<Unit> caster;
-        std::weak_ptr<Unit> target;
+        std::weak_ptr<ITargetable> caster;
+        std::weak_ptr<ITargetable> target;
     
 
     public:

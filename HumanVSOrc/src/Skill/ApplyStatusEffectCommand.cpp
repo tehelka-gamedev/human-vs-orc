@@ -3,17 +3,17 @@
 #include <iostream>
 
 #include "StatusEffect.h"
-#include "../Unit.h"
+#include "../ITargetable.h"
 
-namespace Skills
+namespace skills
 {
     ApplyStatusEffectCommand::ApplyStatusEffectCommand(std::unique_ptr<StatusEffect> status) : status(std::move(status))
     {
     }
 
-    void ApplyStatusEffectCommand::Execute(std::weak_ptr<Unit> caster, std::weak_ptr<Unit> target)
+    void ApplyStatusEffectCommand::Execute(::std::weak_ptr<ITargetable> caster, ::std::weak_ptr<ITargetable> target)
     {
-        std::shared_ptr<Unit> target_ptr = target.lock();
+        std::shared_ptr<ITargetable> target_ptr = target.lock();
         if (!target_ptr)
         {
 

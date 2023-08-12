@@ -9,7 +9,7 @@
 
 #include "../Bonus.h"
 
-namespace Skills
+namespace skills
 {
     SkillFactory::~SkillFactory() = default;
 

@@ -1,6 +1,6 @@
 ﻿#include "Command.h"
 
-namespace Skills
+namespace skills
 {
     
 }

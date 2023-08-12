@@ -9,7 +9,7 @@
 #include "../src/Skill/ApplyStatusEffectCommand.h"
 
 
-using namespace Skills;
+using namespace skills;
 
 class TestCommand : public ::testing::Test
 {
@@ -57,7 +57,7 @@ TEST_F(TestCommand, TestDealDamageCommand)
 TEST_F(TestCommand, TestApplyBonusToCasterCommand)
 {
     const float damage_before = caster->GetAttributeValue(AttributeType::DAMAGE);
-    auto command = std::make_unique<ApplyBonusToCasterCommand>(std::make_shared<Bonus>(0, 0.10f, AttributeType::DAMAGE, Bonus::Type::RAW));
+    auto command = std::make_unique<ApplyBonusToCasterCommand>(std::make_shared<Bonus>(0.0f, 0.10f, AttributeType::DAMAGE, Bonus::Type::RAW));
     command->Execute(caster, target);
     EXPECT_EQ(caster->GetAttributeValue(AttributeType::DAMAGE), damage_before * 1.1f);
 }

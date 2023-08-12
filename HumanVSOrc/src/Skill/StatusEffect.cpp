@@ -1,9 +1,10 @@
 ﻿#include "StatusEffect.h"
 
 #include "Command.h"
-#include "../Unit.h"
+#include "../ITargetable.h"
 
-namespace Skills
+
+namespace skills
 {
     StatusEffect::StatusEffect(std::string name, int duration, Type type,
                                std::unique_ptr<Command> on_update_command) : name(std::move(name)),

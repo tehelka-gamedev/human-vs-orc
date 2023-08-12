@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "Command.h"
 
-namespace Skills
+namespace skills
 {
     class DealDamageCommand : public Command
     {
@@ -9,6 +9,6 @@ namespace Skills
         float damage_amount = 0.0f;
     public:
         explicit DealDamageCommand(float damage_amount);
-        void Execute(std::weak_ptr<Unit> caster, std::weak_ptr<Unit> target) override;
+        void Execute(::std::weak_ptr<ITargetable> caster, ::std::weak_ptr<ITargetable> target) override;
     };
 }

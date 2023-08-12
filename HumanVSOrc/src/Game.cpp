@@ -33,8 +33,8 @@ void Game::CreateUnits()
     // Add skills to the units
     // Charge to the human
     // and Stun to the orc
-    unit_list[0]->AddSkill(Skills::SkillFactory::CreateChargeSkill());
-    unit_list[1]->AddSkill(Skills::SkillFactory::CreateStunSkill());
+    unit_list[0]->AddSkill(skills::SkillFactory::CreateChargeSkill());
+    unit_list[1]->AddSkill(skills::SkillFactory::CreateStunSkill());
 }
 
 Game::Game() : turn(0)

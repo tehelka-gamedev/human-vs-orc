@@ -2,9 +2,10 @@
 #include <memory>
 #include <string>
 
+class ITargetable;
 class Unit;
 
-namespace Skills
+namespace skills
 {
     class Command;
 
@@ -26,7 +27,7 @@ namespace Skills
 
         
         bool IsReady() const;
-        void Execute(std::weak_ptr<Unit> caster, std::weak_ptr<Unit> target);
+        void Execute(std::weak_ptr<ITargetable> caster, std::weak_ptr<ITargetable> target);
 
         // Getters
         int GetCooldown() const;

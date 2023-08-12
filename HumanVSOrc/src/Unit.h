@@ -6,11 +6,12 @@
 #include "Bonus.h"
 #include "AttributeType.h"
 #include "Equipment.h"
+#include "ITargetable.h"
 #include "LifeSystem.h"
 #include "Skill/StatusEffect.h"
 
 
-namespace Skills
+namespace skills
 {
     class Skill;
     class StatusEffect;
@@ -19,7 +20,7 @@ namespace Skills
 class EquippableItem;
 class Equipment;
 
-class Unit : public std::enable_shared_from_this<Unit>
+class Unit : public std::enable_shared_from_this<Unit>, public ITargetable
 {
     // Attributes
 private:
@@ -31,8 +32,8 @@ private:
 
     std::unique_ptr<Equipment> equipment;
 
-    std::vector<std::unique_ptr<Skills::Skill>> skills;
-    std::vector<std::unique_ptr<Skills::StatusEffect>> status_effects;
+    std::vector<std::unique_ptr<skills::Skill>> skills;
+    std::vector<std::unique_ptr<skills::StatusEffect>> status_effects;
     
 public:
     explicit Unit(std::string name);
@@ -75,18 +76,18 @@ public:
 
     //// Skills
     // Add a skill to the unit
-    void AddSkill(std::unique_ptr<Skills::Skill> skill);
+    void AddSkill(std::unique_ptr<skills::Skill> skill);
     // Cast all skills
     void CastAllSkills();
     void TickAllSkills() const;
 
     //// Status effects
     // Add a status effect to the unit
-    void AddStatusEffect(std::unique_ptr<Skills::StatusEffect> status_effect);
+    void AddStatusEffect(std::unique_ptr<skills::StatusEffect> status_effect);
     // Tick all status effects
     void TickAllStatusEffects();
     // Returns true if the unit has a status effect of the given type
-    bool HasStatusEffect(Skills::StatusEffect::Type status_effect_type) const;
+    bool HasStatusEffect(skills::StatusEffect::Type status_effect_type) const;
     
     // Getters
     std::string GetName() const;

@@ -6,7 +6,7 @@
 #include "../RandomGenerator.h"
 #include "Command.h"
 
-namespace Skills
+namespace skills
 {
     Skill::Skill(std::string name, const int cd, const float success_rate, std::unique_ptr<Command> command) : name(std::move(
         name)), cooldown(cd), success_rate(success_rate), command(std::move(command))
@@ -34,7 +34,7 @@ namespace Skills
         return current_cooldown == 0;
     }
 
-    void Skill::Execute(std::weak_ptr<Unit> caster, std::weak_ptr<Unit> target)
+    void Skill::Execute(::std::weak_ptr<ITargetable> caster, ::std::weak_ptr<ITargetable> target)
     {
         if(command == nullptr)
         {

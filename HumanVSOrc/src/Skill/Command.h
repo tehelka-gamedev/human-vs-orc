@@ -3,9 +3,9 @@
 
 // class Unit;
 
-class Unit;
+class ITargetable;
 
-namespace Skills
+namespace skills
 {
     // Command is the base class for all commands.
     // It is used to implement the Command design pattern.
@@ -13,7 +13,7 @@ namespace Skills
     {
     public:
         virtual ~Command() = default;
-        virtual void Execute(std::weak_ptr<Unit> caster, std::weak_ptr<Unit> target) = 0;
+        virtual void Execute(std::weak_ptr<ITargetable> caster, std::weak_ptr<ITargetable> target) = 0;
         
     };
     
