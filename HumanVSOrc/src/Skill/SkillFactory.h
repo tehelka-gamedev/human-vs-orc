@@ -1,19 +1,23 @@
 ﻿#pragma once
 #include <memory>
 
-class Bonus;
-
-namespace skills
+namespace HumanVSOrc
 {
-    class Skill;
-    
-    class SkillFactory
+    class Bonus;
+
+    namespace skills
     {
-    public:
-        ~SkillFactory();
-        static std::unique_ptr<Skill> CreateChargeSkill();
-        static std::unique_ptr<Skill> CreateStunSkill();
+        class Skill;
+    
+        class SkillFactory
+        {
+        public:
+            ~SkillFactory();
+            static std::unique_ptr<Skill> CreateChargeSkill();
+            static std::unique_ptr<Skill> CreateStunSkill();
         
-    };
+        };
+    
+    }
     
 }

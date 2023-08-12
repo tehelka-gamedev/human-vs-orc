@@ -1,13 +1,12 @@
 ﻿#include "StatusEffect.h"
 
-#include "Command.h"
-#include "../ITargetable.h"
+#include "Skill/Command.h"
 
 
-namespace skills
+namespace HumanVSOrc
 {
     StatusEffect::StatusEffect(std::string name, int duration, Type type,
-                               std::unique_ptr<Command> on_update_command) : name(std::move(name)),
+                               std::unique_ptr<skills::Command> on_update_command) : name(std::move(name)),
                                                                               duration(duration),
                                                                               type(type),
                                                                               on_update_command(std::move(

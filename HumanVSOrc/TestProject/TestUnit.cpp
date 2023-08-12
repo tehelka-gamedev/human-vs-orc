@@ -5,6 +5,8 @@
 #include "../src/Skill/DealDamageCommand.h"
 #include "../src/Skill/Skill.h"
 
+using namespace HumanVSOrc;
+
 class TestUnit : public ::testing::Test
 {
 protected:
@@ -110,7 +112,7 @@ TEST_F(TestUnit, TestStun)
   
   unit->SetTarget(target);
 
-  unit->AddStatusEffect(std::make_unique<skills::StatusEffect>("Stun", 1, skills::StatusEffect::Type::STUNNED));
+  unit->AddStatusEffect(std::make_unique<StatusEffect>("Stun", 1, StatusEffect::Type::STUNNED));
   
   unit->Attack();
   EXPECT_FLOAT_EQ(target->GetLifeComponentValue(AttributeType::HEALTH), target_health);
@@ -120,23 +122,23 @@ TEST_F(TestUnit, TestStun)
 // Test the Unit::TickAllStatusEffects method
 TEST_F(TestUnit, TestTickAllStatusEffects)
 {
-  unit->AddStatusEffect(std::make_unique<skills::StatusEffect>("Stun", 1, skills::StatusEffect::Type::STUNNED));
-  unit->AddStatusEffect(std::make_unique<skills::StatusEffect>("Bleed", 2, skills::StatusEffect::Type::BLEEDING));
+  unit->AddStatusEffect(std::make_unique<StatusEffect>("Stun", 1, StatusEffect::Type::STUNNED));
+  unit->AddStatusEffect(std::make_unique<StatusEffect>("Bleed", 2, StatusEffect::Type::BLEEDING));
 
 
-  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::STUNNED), true);
-  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::BLEEDING), true);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::STUNNED), true);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::BLEEDING), true);
   
   unit->TickAllStatusEffects();
 
   // Test the unit has no stun but still bleeding
-  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::STUNNED), false);
-  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::BLEEDING), true);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::STUNNED), false);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::BLEEDING), true);
 
   // Tick again to remove the bleed
   unit->TickAllStatusEffects();
-  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::STUNNED), false);
-  EXPECT_EQ(unit->HasStatusEffect(skills::StatusEffect::Type::BLEEDING), false);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::STUNNED), false);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::BLEEDING), false);
   
 
   

@@ -2,30 +2,34 @@
 #include <memory>
 #include <vector>
 
-class Game
+namespace HumanVSOrc
 {
-    // Attributes
-private:
-    std::vector<std::shared_ptr<class Unit>> unit_list;
+    class Game
+    {
+        // Attributes
+    private:
+        std::vector<std::shared_ptr<class Unit>> unit_list;
 
-    int turn=0;
+        int turn=0;
 
-    void Init();
-    void CreateUnits();
+        void Init();
+        void CreateUnits();
 
-    void Update();
-    void PrintTitle() const;
+        void Update();
+        void PrintTitle() const;
 
-    bool IsOver();
-public:
-    Game();
-    ~Game();
+        bool IsOver();
+    public:
+        Game();
+        ~Game();
 
-    void Run();
+        void Run();
 
-};
+    };
 
-inline bool Game::IsOver()
-{
-    return turn >= 3;
+    inline bool Game::IsOver()
+    {
+        return turn >= 3;
+    }
+    
 }

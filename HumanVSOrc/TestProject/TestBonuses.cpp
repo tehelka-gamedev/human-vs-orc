@@ -2,6 +2,8 @@
 
 #include "../src/Bonus.h"
 
+using namespace HumanVSOrc;
+
 // Test that attributes are correctly initialized
 TEST(TestBonuses, TestInitialisation)
 {

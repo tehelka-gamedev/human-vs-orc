@@ -2,38 +2,42 @@
 #include <memory>
 #include <string>
 
-class ITargetable;
-class Unit;
-
-namespace skills
+namespace HumanVSOrc
 {
-    class Command;
+    class ITargetable;
+    class Unit;
 
-    class Skill
+    namespace skills
     {
-        // Attributes
-    private:
-        std::string name;
-        int cooldown = 0;
-        int current_cooldown = 0;
-        float success_rate = 1.0f;
+        class Command;
 
-        std::unique_ptr<Command> command;
-    public:
-        Skill(std::string name, int cd, float success_rate, std::unique_ptr<Command> command);
-        ~Skill();
-        // Reduce the cooldown by 1
-        void Tick();
+        class Skill
+        {
+            // Attributes
+        private:
+            std::string name;
+            int cooldown = 0;
+            int current_cooldown = 0;
+            float success_rate = 1.0f;
+
+            std::unique_ptr<Command> command;
+        public:
+            Skill(std::string name, int cd, float success_rate, std::unique_ptr<Command> command);
+            ~Skill();
+            // Reduce the cooldown by 1
+            void Tick();
 
         
-        bool IsReady() const;
-        void Execute(std::weak_ptr<ITargetable> caster, std::weak_ptr<ITargetable> target);
+            bool IsReady() const;
+            void Execute(std::weak_ptr<ITargetable> caster, std::weak_ptr<ITargetable> target);
 
-        // Getters
-        int GetCooldown() const;
-        int GetCurrentCooldown() const;
+            // Getters
+            int GetCooldown() const;
+            int GetCurrentCooldown() const;
 
-        // Setters
-        void SetSuccessRate(float rate);
-    };
+            // Setters
+            void SetSuccessRate(float rate);
+        };
+    }
+    
 }

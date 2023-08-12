@@ -2,11 +2,15 @@
 #include <memory>
 #include <string>
 
-class ITargetable;
-
-namespace skills
+namespace HumanVSOrc
 {
-    class Command;
+    
+    namespace skills
+    {
+        class Command;
+    }
+    
+    class ITargetable;
     
     class StatusEffect
     {
@@ -22,7 +26,7 @@ namespace skills
         std::string name;
         int duration = -1; // -1 means infinite
         Type type = Type::NONE;
-        std::unique_ptr<Command> on_update_command = nullptr;
+        std::unique_ptr<skills::Command> on_update_command = nullptr;
 
         // May add a on_apply_command and on_remove_command later
 
@@ -33,7 +37,7 @@ namespace skills
     
 
     public:
-        StatusEffect(std::string name, int duration=-1, Type type=Type::NONE, std::unique_ptr<class Command> on_update_command=nullptr);
+        StatusEffect(std::string name, int duration=-1, Type type=Type::NONE, std::unique_ptr<skills::Command> on_update_command=nullptr);
 
         ~StatusEffect();
 

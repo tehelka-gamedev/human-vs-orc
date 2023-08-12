@@ -4,6 +4,8 @@
 #include "../src/EquippableItem.h"
 #include "../src/Equipment.h"
 
+using namespace HumanVSOrc;
+
 class TestEquipment : public ::testing::Test
 {
 protected:

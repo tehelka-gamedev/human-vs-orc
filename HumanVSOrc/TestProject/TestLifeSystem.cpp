@@ -3,6 +3,8 @@
 #include "../src/LifeComponent.h"
 
 
+using namespace HumanVSOrc;
+
 // Test LifeSystem::TakeDamage
 TEST(TestLifeSystem, TestTakeDamage)
 {

@@ -8,15 +8,18 @@
 #include "Equipment.h"
 #include "ITargetable.h"
 #include "LifeSystem.h"
-#include "Skill/StatusEffect.h"
+#include "StatusEffect.h"
 
 
+
+namespace HumanVSOrc
+{
 namespace skills
 {
     class Skill;
-    class StatusEffect;
 }
-
+    
+    class StatusEffect;
 class EquippableItem;
 class Equipment;
 
@@ -33,7 +36,7 @@ private:
     std::unique_ptr<Equipment> equipment;
 
     std::vector<std::unique_ptr<skills::Skill>> skills;
-    std::vector<std::unique_ptr<skills::StatusEffect>> status_effects;
+    std::vector<std::unique_ptr<HumanVSOrc::StatusEffect>> status_effects;
     
 public:
     explicit Unit(std::string name);
@@ -83,11 +86,11 @@ public:
 
     //// Status effects
     // Add a status effect to the unit
-    void AddStatusEffect(std::unique_ptr<skills::StatusEffect> status_effect);
+    void AddStatusEffect(std::unique_ptr<HumanVSOrc::StatusEffect> status_effect);
     // Tick all status effects
     void TickAllStatusEffects();
     // Returns true if the unit has a status effect of the given type
-    bool HasStatusEffect(skills::StatusEffect::Type status_effect_type) const;
+    bool HasStatusEffect(HumanVSOrc::StatusEffect::Type status_effect_type) const;
     
     // Getters
     std::string GetName() const;
@@ -107,3 +110,4 @@ public:
 
     
 };
+}

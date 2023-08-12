@@ -1,6 +1,10 @@
 ﻿#include "Command.h"
 
-namespace skills
+namespace HumanVSOrc
 {
+    namespace skills
+    {
+    
+    }
     
 }

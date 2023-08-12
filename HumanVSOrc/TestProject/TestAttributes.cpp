@@ -3,6 +3,8 @@
 #include "../src/Attribute.h"
 #include "../src/Bonus.h"
 
+using namespace HumanVSOrc;
+
 class TestAttributes : public ::testing::Test
 {
 protected:

@@ -8,7 +8,7 @@
 #include "../src/Skill/ApplyBonusToCasterCommand.h"
 #include "../src/Skill/ApplyStatusEffectCommand.h"
 
-
+using namespace HumanVSOrc;
 using namespace skills;
 
 class TestCommand : public ::testing::Test

@@ -5,20 +5,24 @@
 
 #include "Equipment.h"
 
-class EquippableItem
+namespace HumanVSOrc
 {
-    std::string name = "Unnamed item";
-    Equipment::Slot slot;
-    std::vector<std::shared_ptr<class Bonus>> bonuses; // list of bonuses provided by the item
-public:
-    EquippableItem(std::string name, Equipment::Slot slot);
-    ~EquippableItem();
+    class EquippableItem
+    {
+        std::string name = "Unnamed item";
+        Equipment::Slot slot;
+        std::vector<std::shared_ptr<class Bonus>> bonuses; // list of bonuses provided by the item
+    public:
+        EquippableItem(std::string name, Equipment::Slot slot);
+        ~EquippableItem();
 
-    void AddBonus(std::shared_ptr<class Bonus> bonus);
+        void AddBonus(std::shared_ptr<class Bonus> bonus);
 
-    // Getters
-    std::string GetName() const;
-    Equipment::Slot GetSlot() const;
-    std::vector<std::shared_ptr<class Bonus>> GetBonuses() const;
-    const std::vector<std::shared_ptr<class Bonus>>& GetBonusesByReference() const;
-};
+        // Getters
+        std::string GetName() const;
+        Equipment::Slot GetSlot() const;
+        std::vector<std::shared_ptr<class Bonus>> GetBonuses() const;
+        const std::vector<std::shared_ptr<class Bonus>>& GetBonusesByReference() const;
+    };
+    
+}

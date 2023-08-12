@@ -2,9 +2,12 @@
 
 #include <random>
 
-namespace RandomGenerator
+namespace HumanVSOrc
 {
-    inline std::default_random_engine generator;
-    inline std::uniform_real_distribution<float> uniform(0.0, 1.0);
+    namespace RandomGenerator
+    {
+        inline std::default_random_engine generator;
+        inline std::uniform_real_distribution<float> uniform(0.0, 1.0);
 
+    }
 }

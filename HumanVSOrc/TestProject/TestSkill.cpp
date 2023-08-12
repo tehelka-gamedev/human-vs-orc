@@ -7,6 +7,8 @@
 #include "../src/const.h"
 #include "../src/Skill/SkillFactory.h"
 
+using namespace HumanVSOrc;
+
 using namespace skills;
 
 class TestSkill : public ::testing::Test

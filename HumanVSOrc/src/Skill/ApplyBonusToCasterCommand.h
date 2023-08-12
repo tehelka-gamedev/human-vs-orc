@@ -1,16 +1,21 @@
 ﻿#pragma once
 #include "Command.h"
 
-class Bonus;
 
-namespace skills
+namespace HumanVSOrc
 {
-    class ApplyBonusToCasterCommand : public Command
+    class Bonus;
+
+    namespace skills
     {
-        std::shared_ptr<Bonus> bonus;
-    public:
-        explicit ApplyBonusToCasterCommand(std::shared_ptr<Bonus> bonus);
-        void Execute(std::weak_ptr<ITargetable> caster, std::weak_ptr<ITargetable> target) override;
-    };
+        class ApplyBonusToCasterCommand : public Command
+        {
+            std::shared_ptr<Bonus> bonus;
+        public:
+            explicit ApplyBonusToCasterCommand(std::shared_ptr<Bonus> bonus);
+            void Execute(std::weak_ptr<ITargetable> caster, std::weak_ptr<ITargetable> target) override;
+        };
+    
+    }
     
 }

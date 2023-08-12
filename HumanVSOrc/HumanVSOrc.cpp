@@ -32,11 +32,11 @@ int main(int argc, char* argv[])
     //
     //Initialize random device
     std::random_device rd;
-    RandomGenerator::generator.seed(rd());
+    HumanVSOrc::RandomGenerator::generator.seed(rd());
 
     // Later to add colors...
     // std::cout << "\033[37;42m 20/20             \033[0m\n";
-    Game game;
+    HumanVSOrc::Game game;
     
     game.Run();
     

@@ -3,16 +3,21 @@
 
 #include "Command.h"
 
-namespace skills
+
+namespace HumanVSOrc
 {
     class StatusEffect;
-    
-    class ApplyStatusEffectCommand : public Command
+    namespace skills
     {
-        std::unique_ptr<StatusEffect> status;
-    public:
-        explicit ApplyStatusEffectCommand(std::unique_ptr<StatusEffect> status);
-        void Execute(std::weak_ptr<ITargetable> caster, std::weak_ptr<ITargetable> target) override;
+    
+        class ApplyStatusEffectCommand : public Command
+        {
+            std::unique_ptr<StatusEffect> status;
+        public:
+            explicit ApplyStatusEffectCommand(std::unique_ptr<StatusEffect> status);
+            void Execute(std::weak_ptr<ITargetable> caster, std::weak_ptr<ITargetable> target) override;
         
-    };
+        };
+    }
+    
 }
