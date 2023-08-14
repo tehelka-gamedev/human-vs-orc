@@ -38,6 +38,7 @@
   <ItemGroup>
     <ClCompile Include="..\src\Attribute.cpp" />
     <ClCompile Include="..\src\Bonus.cpp" />
+    <ClCompile Include="..\src\DependentAttribute.cpp" />
     <ClCompile Include="..\src\Equipment.cpp" />
     <ClCompile Include="..\src\EquippableItem.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
@@ -52,6 +53,7 @@
     <ClCompile Include="..\src\Skill\SkillFactory.cpp" />
     <ClCompile Include="..\src\StatusEffect.cpp" />
     <ClCompile Include="..\src\Unit.cpp" />
+    <ClCompile Include="..\src\UnitFactory.cpp" />
     <ClCompile Include="TestCommand.cpp" />
     <ClCompile Include="TestEquipment.cpp" />
     <ClCompile Include="TestLifeSystem.cpp" />
@@ -74,6 +76,7 @@
     <ClInclude Include="..\src\AttributeType.h" />
     <ClInclude Include="..\src\Bonus.h" />
     <ClInclude Include="..\src\const.h" />
+    <ClInclude Include="..\src\DependentAttribute.h" />
     <ClInclude Include="..\src\Equipment.h" />
     <ClInclude Include="..\src\EquippableItem.h" />
     <ClInclude Include="..\src\Game.h" />
@@ -89,6 +92,7 @@
     <ClInclude Include="..\src\Skill\SkillFactory.h" />
     <ClInclude Include="..\src\StatusEffect.h" />
     <ClInclude Include="..\src\Unit.h" />
+    <ClInclude Include="..\src\UnitFactory.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

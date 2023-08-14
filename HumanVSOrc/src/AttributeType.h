@@ -9,8 +9,9 @@ namespace HumanVSOrc
         DAMAGE,
         ARMOR, // defense against physical damage
 
-        // TODO : add attributes depending on the other attributes
-    
+        AGILITY, // just a regular attribute boosting CRITICAL_CHANCE
+        // Attributes supposed to depend on other attributes
+        CRITICAL_CHANCE, // chance to deal a critical hit, boosted by AGILITY
     };
     
 }

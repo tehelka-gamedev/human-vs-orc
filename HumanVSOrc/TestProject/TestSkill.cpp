@@ -2,10 +2,10 @@
 
 
 #include "../src/Skill/Skill.h"
-#include "../src/Skill/Command.h"
 #include "../src/Unit.h"
 #include "../src/const.h"
 #include "../src/Skill/SkillFactory.h"
+#include "../src/Skill/Command.h"
 
 using namespace HumanVSOrc;
 

@@ -2,8 +2,6 @@
 
 #include "ApplyBonusToCasterCommand.h"
 #include "ApplyStatusEffectCommand.h"
-#include "DealDamageCommand.h"
-#include "Skill.h"
 #include "../StatusEffect.h"
 #include "../const.h"
 

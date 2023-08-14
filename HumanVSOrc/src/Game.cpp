@@ -4,9 +4,7 @@
 #include <iostream>
 
 #include "Unit.h"
-#include "const.h"
-#include "Skill/SkillFactory.h"
-#include "Skill/Skill.h"
+#include "UnitFactory.h"
 
 namespace HumanVSOrc
 {
@@ -21,22 +19,10 @@ namespace HumanVSOrc
     void Game::CreateUnits()
     {
         // Create two units
-        unit_list.push_back(std::make_shared<Unit>("Human"));
-        unit_list.push_back(std::make_shared<Unit>("Orc"));
+        unit_list.push_back(UnitFactory::CreateKnight());
+        unit_list.push_back(UnitFactory::CreateOrc());
 
-        // Add Health and damage attributes to the units
-        unit_list[0]->AddLifeComponent(AttributeType::HEALTH, "Health", static_cast<float>(GameConstants::KnightConstants::BASE_HEALTH));
-        unit_list[0]->AddLifeComponent(AttributeType::SHIELD, "Shield", static_cast<float>(GameConstants::KnightConstants::BASE_SHIELD));
-        unit_list[0]->AddAttribute(AttributeType::DAMAGE, "Damage", static_cast<float>(GameConstants::KnightConstants::BASE_DAMAGE));
-
-        unit_list[1]->AddLifeComponent(AttributeType::HEALTH, "Health", static_cast<float>(GameConstants::OrcConstants::BASE_HEALTH));
-        unit_list[1]->AddAttribute(AttributeType::DAMAGE, "Damage", static_cast<float>(GameConstants::OrcConstants::BASE_DAMAGE));
-
-        // Add skills to the units
-        // Charge to the human
-        // and Stun to the orc
-        unit_list[0]->AddSkill(skills::SkillFactory::CreateChargeSkill());
-        unit_list[1]->AddSkill(skills::SkillFactory::CreateStunSkill());
+  
     }
 
     Game::Game() : turn(0)

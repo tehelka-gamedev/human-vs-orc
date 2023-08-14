@@ -29,14 +29,14 @@ class Unit : public std::enable_shared_from_this<Unit>, public ITargetable
 private:
     std::string name;
     std::unique_ptr<LifeSystem> life_system;
-    std::map<AttributeType, std::unique_ptr<Attribute> > attributes = {};
+    std::map<AttributeType, std::shared_ptr<Attribute> > attributes = {};
     
     std::weak_ptr<Unit> target;
 
     std::unique_ptr<Equipment> equipment;
 
     std::vector<std::unique_ptr<skills::Skill>> skills;
-    std::vector<std::unique_ptr<HumanVSOrc::StatusEffect>> status_effects;
+    std::vector<std::unique_ptr<StatusEffect>> status_effects;
     
 public:
     explicit Unit(std::string name);

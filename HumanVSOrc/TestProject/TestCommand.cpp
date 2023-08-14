@@ -2,7 +2,6 @@
 
 
 #include "../src/Skill/Skill.h"
-#include "../src/Skill/Command.h"
 #include "../src/Unit.h"
 #include "../src/Skill/DealDamageCommand.h"
 #include "../src/Skill/ApplyBonusToCasterCommand.h"

@@ -3,10 +3,8 @@
 #include <random>
 
 
-#include "src/EquippableItem.h"
 #include "src/Game.h"
 #include "src/RandomGenerator.h"
-#include "src/Unit.h"
 
 
 int main(int argc, char* argv[])

@@ -10,7 +10,7 @@ namespace HumanVSOrc
     class Attribute
     {
         // Attributes
-    private:
+    protected:
         AttributeType attribute_type;
         std::string display_name;
         float base_value = 0;
@@ -20,7 +20,7 @@ namespace HumanVSOrc
         float final_value = 0; // Cache the final value to avoid recalculating it every time.
         bool is_dirty = true; // If true, the final value needs to be recalculated.
 
-        float CalculateFinalValue();
+        virtual float CalculateFinalValue();
 
         void AddRawBonus(const std::shared_ptr<Bonus>& bonus);
         void AddFinalBonus(const std::shared_ptr<Bonus>& bonus);
@@ -28,7 +28,7 @@ namespace HumanVSOrc
         void RemoveFinalBonus(std::shared_ptr<Bonus>& bonus);
     public:
         Attribute(AttributeType attribute_type, const std::string& name, float value);
-        ~Attribute();
+        virtual ~Attribute();
 
         void AddBonus(const std::shared_ptr<Bonus>& bonus);
         void RemoveBonus(std::shared_ptr<Bonus>& bonus);
@@ -36,7 +36,7 @@ namespace HumanVSOrc
 
         void Tick(); // Decrease the time left of all bonuses by 1.
 
-        float GetValue();
+        virtual float GetValue();
         AttributeType GetAttributeType() const;
         std::string GetDisplayName() const;
 

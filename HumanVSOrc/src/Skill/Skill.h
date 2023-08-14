@@ -5,7 +5,6 @@
 namespace HumanVSOrc
 {
     class ITargetable;
-    class Unit;
 
     namespace skills
     {

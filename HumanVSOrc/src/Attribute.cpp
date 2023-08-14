@@ -39,7 +39,7 @@ namespace HumanVSOrc
 
     Attribute::Attribute(AttributeType attribute_type, const std::string& name, float value) : attribute_type(attribute_type), display_name(name), base_value(value)
     {
-        final_value = CalculateFinalValue();
+        final_value = Attribute::CalculateFinalValue();
     }
 
     Attribute::~Attribute()

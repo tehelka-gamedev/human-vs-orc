@@ -1,13 +1,14 @@
 ﻿#pragma once
 #include <memory>
 
+#include "Skill.h"
+
 namespace HumanVSOrc
 {
     class Bonus;
 
     namespace skills
     {
-        class Skill;
     
         class SkillFactory
         {

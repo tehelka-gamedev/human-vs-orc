@@ -49,7 +49,7 @@ namespace HumanVSOrc
             return;
         }
         // add the attribute
-        attributes[attribute_type] = std::make_unique<Attribute>(attribute_type, display_name, base_value);
+        attributes[attribute_type] = std::make_shared<Attribute>(attribute_type, display_name, base_value);
     }
 
     void Unit::AddLifeComponent(AttributeType attribute_type, const std::string& component_name, float max_value) const

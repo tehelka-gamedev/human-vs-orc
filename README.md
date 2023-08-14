@@ -3,18 +3,39 @@
 This project is a small simulation of a battle between two RPG units (a human and an orc).
 
 ## Goal of this project
-The goal of this project is to have a **clean code architecture** and **be modular** to add easily new class, skills or attributes.
+The goal of this project is to have a **clean code architecture** and **be modular** to add easily new RPG classes, skills or attributes.
 
 See the [Class Diagram](#class-diagram) for more details about the architecture design.
 
-More info soon.
+Here are the main features implemented:
+- [x] Modular skill system with the use of the [Command Pattern](https://refactoring.guru/design-patterns/command)
+- [x] Modular RPG attribute system for units
+  - Attributes depending on other attributes (e.g. critcal_chance gaining +1 for each 5 points of agility) can be created.
+- [x] Modular "Life System" on top of attributes
+  - Used to handle current and max health points, or similar
+  - Can be modified during runtime to add a shield, without changing the Unit class implementation
+- [x] Modular Bonus system for attributes
+  - items can be equipped to add bonuses to attributes
+  - skills can add bonuses to attributes
+- [ ] Modular Status Effect system for units
+  - units can be stunned, bleeding, etc. TODO : how to handle new status effects? OnTick() method? (e.g. poison)
+  - status can be added by skills
+- [x] Modular RPG units with attributes and skills that can be added at runtime
 
-### How to add a new RPG Class
+### How to add a new RPG Unit
 
-Let's say you want to add a new RPG class called ``Paladin``. Here are the steps to follow:
+Let's say you want to add a new RPG unit called ``Paladin``. No need to create another class, you can add the components you want to the ``Unit`` instance that you create. Here are the steps to follow:
 
-TODO (need to define some RPG classes first)
-
+```c++
+// 1. Create a new Unit instance
+Unit paladin("Paladin");
+// 2. Add the attributes you want
+paladin.AddAttribute(AttributeType::HEALTH, "Health", 200.0f);
+paladin.AddAttribute(AttributeType::DAMAGE, "Damage", 15.0f);
+// etc...
+// 3. Add the skills you want
+paladin.AddSkill(skills::SkillFactory::CreateOverpoweredPaladinSkill()); // See skill creation section for more details
+``` 
 
 ### How to create a new Skill
 
@@ -83,5 +104,7 @@ Here is the class diagram of this project. Note that not all methods nor class a
 ## Possible Improvements
 
 TODO
-- Could add dependant attributes (e.g. ``DAMAGE`` could gain +1 for every 2 ``STRENGTH`` points)
 - Only ``EquippableItem`` items are defined but we could easily add ``Consumable`` items (e.g. potions) with the use of the already implemented ``Command`` pattern. 
+
+
+
