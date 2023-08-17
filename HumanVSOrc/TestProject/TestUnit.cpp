@@ -112,7 +112,7 @@ TEST_F(TestUnit, TestStun)
   
   unit->SetTarget(target);
 
-  unit->AddStatusEffect(std::make_unique<StatusEffect>("Stun", 1, StatusEffect::Type::STUNNED));
+  unit->AddStatusEffect(std::make_unique<StatusEffect>("Stun", 1, StatusEffectType::STUNNED));
   
   unit->Attack();
   EXPECT_FLOAT_EQ(target->GetLifeComponentValue(AttributeType::HEALTH), target_health);
@@ -122,23 +122,23 @@ TEST_F(TestUnit, TestStun)
 // Test the Unit::TickAllStatusEffects method
 TEST_F(TestUnit, TestTickAllStatusEffects)
 {
-  unit->AddStatusEffect(std::make_unique<StatusEffect>("Stun", 1, StatusEffect::Type::STUNNED));
-  unit->AddStatusEffect(std::make_unique<StatusEffect>("Bleed", 2, StatusEffect::Type::BLEEDING));
+  unit->AddStatusEffect(std::make_unique<StatusEffect>("Stun", 1, StatusEffectType::STUNNED));
+  unit->AddStatusEffect(std::make_unique<StatusEffect>("Bleed", 2, StatusEffectType::BLEEDING));
 
 
-  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::STUNNED), true);
-  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::BLEEDING), true);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffectType::STUNNED), true);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffectType::BLEEDING), true);
   
   unit->TickAllStatusEffects();
 
   // Test the unit has no stun but still bleeding
-  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::STUNNED), false);
-  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::BLEEDING), true);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffectType::STUNNED), false);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffectType::BLEEDING), true);
 
   // Tick again to remove the bleed
   unit->TickAllStatusEffects();
-  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::STUNNED), false);
-  EXPECT_EQ(unit->HasStatusEffect(StatusEffect::Type::BLEEDING), false);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffectType::STUNNED), false);
+  EXPECT_EQ(unit->HasStatusEffect(StatusEffectType::BLEEDING), false);
   
 
   
@@ -165,5 +165,24 @@ TEST_F(TestUnit, TestCastAllSkills)
   EXPECT_FLOAT_EQ(target->GetLifeComponentValue(AttributeType::HEALTH), target_health - 30);
   EXPECT_EQ(target->IsAlive(), true);
 
+
+}
+
+// Test adding a dependant attribute to a unit
+TEST_F(TestUnit, TestAddDependantAttribute)
+{
+  // Add an attribute AGILITY to the unit with value 12
+  unit->AddAttribute(AttributeType::AGILITY, "agility", 12);
+
+  auto agility = unit->GetAttribute(AttributeType::AGILITY);
+
+  std::vector<DependentAttribute::Dependency> dependencies{
+    DependentAttribute::Dependency(agility, 1.0f, 5.0f)
+  };
+  // Add a dependant attribute CRITICAL_CHANCE with a base value 1.0f and gaining 1 for every 5 points of AGILITY
+  unit->AddDependentAttribute(AttributeType::CRITICAL_CHANCE, "critical chance", 1.0f, dependencies);
+  
+  // Check that the unit has 1.0f + round(12 / 5) = 3.0f critical chance
+  EXPECT_FLOAT_EQ(unit->GetAttributeValue(AttributeType::CRITICAL_CHANCE), 3.0f);
 
 }

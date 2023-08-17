@@ -4,7 +4,7 @@
 
 namespace HumanVSOrc
 {
-    LifeComponent::LifeComponent(AttributeType attribute_type, std::string name, float max_value): value(max_value), max_value(attribute_type, std::move(name), max_value)
+    LifeComponent::LifeComponent(AttributeType attribute_type, std::string name, float max_value): value(max_value), max_value(std::make_shared<Attribute>(attribute_type, name, max_value))
     {}
 
     bool LifeComponent::IsDepleted() const
@@ -14,29 +14,29 @@ namespace HumanVSOrc
 
     bool LifeComponent::IsFull()
     {
-        return value >= max_value.GetValue();
+        return value >= max_value->GetValue();
     }
 
     void LifeComponent::AddBonus(const std::shared_ptr<Bonus>& bonus)
     {
-        max_value.AddBonus(bonus);
+        max_value->AddBonus(bonus);
         // current value is not changed (as it get weird when you equip then unequip an item)
     }
 
     void LifeComponent::RemoveBonus(std::shared_ptr<Bonus>& bonus)
     {
-        max_value.RemoveBonus(bonus);
+        max_value->RemoveBonus(bonus);
         // cap the current value to the new max value
-        if (value > max_value.GetValue())
+        if (value > max_value->GetValue())
         {
-            value = max_value.GetValue();
+            value = max_value->GetValue();
         }
     }
 
     void LifeComponent::Tick()
     {
         // Might add health regen here ?
-        max_value.Tick();
+        max_value->Tick();
     }
 
     float LifeComponent::TakeDamage(const float damage)
@@ -58,17 +58,22 @@ namespace HumanVSOrc
 
     float LifeComponent::GetMaxValue()
     {
-        return max_value.GetValue();
+        return max_value->GetValue();
     }
 
     std::string LifeComponent::GetDisplayName() const
     {
-        return max_value.GetDisplayName();
+        return max_value->GetDisplayName();
     }
 
     AttributeType LifeComponent::GetAttributeType() const
     {
-        return max_value.GetAttributeType();
+        return max_value->GetAttributeType();
+    }
+
+    std::shared_ptr<Attribute> LifeComponent::GetAttribute()
+    {
+        return max_value;
     }
 
     void LifeComponent::SetValue(float new_value)
@@ -78,7 +83,7 @@ namespace HumanVSOrc
 
     void LifeComponent::SetMaxValue(float new_max_value)
     {
-        max_value.SetBaseValue(new_max_value);
+        max_value->SetBaseValue(new_max_value);
     }
 }
 

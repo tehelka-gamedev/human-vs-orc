@@ -5,6 +5,7 @@
 #include "Attribute.h"
 #include "Bonus.h"
 #include "AttributeType.h"
+#include "DependentAttribute.h"
 #include "Equipment.h"
 #include "ITargetable.h"
 #include "LifeSystem.h"
@@ -40,7 +41,7 @@ private:
     
 public:
     explicit Unit(std::string name);
-    ~Unit();
+    ~Unit() override;
 
     // Attack the target
     // If no target, do nothing
@@ -51,19 +52,20 @@ public:
     bool HasAttribute(AttributeType attribute_type) const;
     
     void AddAttribute(AttributeType attribute_type, const std::string& display_name, float base_value);
+    void AddDependentAttribute(AttributeType attribute_type, const std::string& display_name, float base_value, std::vector<DependentAttribute::Dependency>& dependencies);
     void AddLifeComponent(AttributeType attribute_type, const std::string& component_name, float max_value) const;
 
     // public for now to be able to test
     // but may be private later
     // Add a bonus to the unit
-    void AddBonus(const std::shared_ptr<Bonus>& bonus);
+    void AddBonus(const std::shared_ptr<Bonus>& bonus) override;
     void AddMultipleBonus(const std::vector<std::shared_ptr<Bonus>>& bonuses);
 
     // Remove a bonus from the unit
     void RemoveBonus(std::shared_ptr<Bonus>& bonus);
     void RemoveMultipleBonus(std::vector<std::shared_ptr<Bonus>>& bonuses);
     
-    void TakeDamage(float amount) const;
+    void TakeDamage(float amount) const override;
 
     bool IsAlive() const;
 
@@ -86,11 +88,11 @@ public:
 
     //// Status effects
     // Add a status effect to the unit
-    void AddStatusEffect(std::unique_ptr<HumanVSOrc::StatusEffect> status_effect);
+    void AddStatusEffect(std::unique_ptr<HumanVSOrc::StatusEffect> status_effect) override;
     // Tick all status effects
     void TickAllStatusEffects();
     // Returns true if the unit has a status effect of the given type
-    bool HasStatusEffect(HumanVSOrc::StatusEffect::Type status_effect_type) const;
+    bool HasStatusEffect(HumanVSOrc::StatusEffectType status_effect_type) const;
     
     // Getters
     std::string GetName() const;
@@ -99,7 +101,10 @@ public:
     // Returns the value of the attribute of the given type
     // If the attribute is not found, returns std::nanf("")
     float GetAttributeValue(AttributeType attribute_type) const;
-    
+    // Get the attribute of the given type
+    // If the attribute is not found, returns nullptr
+    std::shared_ptr<Attribute> GetAttribute(AttributeType attribute_type) const;
+        
     // Setters
     void SetName(const std::string& new_name);
     void SetTarget(const std::shared_ptr<Unit>& new_target);

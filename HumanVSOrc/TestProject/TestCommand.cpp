@@ -65,8 +65,8 @@ TEST_F(TestCommand, TestApplyBonusToCasterCommand)
 // Apply a status effect that stuns the target
 TEST_F(TestCommand, TestApplyStatusEffectCommand)
 {
-    auto command = std::make_unique<ApplyStatusEffectCommand>(std::make_unique<StatusEffect>("stun", 1, StatusEffect::Type::STUNNED));
+    auto command = std::make_unique<ApplyStatusEffectCommand>(std::make_unique<StatusEffect>("stun", 1, StatusEffectType::STUNNED));
     command->Execute(caster, target);
-    EXPECT_EQ(target->HasStatusEffect(StatusEffect::Type::STUNNED), true);
+    EXPECT_EQ(target->HasStatusEffect(StatusEffectType::STUNNED), true);
 }
 

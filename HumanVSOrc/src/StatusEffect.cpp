@@ -5,12 +5,8 @@
 
 namespace HumanVSOrc
 {
-    StatusEffect::StatusEffect(std::string name, int duration, Type type,
-                               std::unique_ptr<skills::Command> on_update_command) : name(std::move(name)),
-                                                                              duration(duration),
-                                                                              type(type),
-                                                                              on_update_command(std::move(
-                                                                                      on_update_command))
+    StatusEffect::StatusEffect(std::string name, int duration, StatusEffectType type) : name(std::move(name)),
+        duration(duration), type(type)
     {
     }
 
@@ -25,10 +21,26 @@ namespace HumanVSOrc
 
         if (on_update_command != nullptr)
         {
-            // TODO
-            // on_update_command->Execute(caster, target);
+            on_update_command->Execute(caster, target);
         }
     }
+
+    void StatusEffect::OnApply() const
+    {
+        if (on_apply_command != nullptr)
+        {
+            on_apply_command->Execute(caster, target);
+        }
+    }
+
+    void StatusEffect::OnRemove() const
+    {
+        if (on_remove_command != nullptr)
+        {
+            on_remove_command->Execute(caster, target);
+        }
+    }
+
 
     bool StatusEffect::IsOver() const
     {
@@ -45,9 +57,39 @@ namespace HumanVSOrc
         return duration;
     }
 
-    StatusEffect::Type StatusEffect::GetType() const
+    StatusEffectType StatusEffect::GetType() const
     {
         return type;
+    }
+
+    StatusEffect& StatusEffect::SetOnApplyCommand(std::unique_ptr<skills::Command> command)
+    {
+        on_apply_command = std::move(command);
+        return *this;
+    }
+
+    StatusEffect& StatusEffect::SetOnUpdateCommand(std::unique_ptr<skills::Command> command)
+    {
+        on_update_command = std::move(command);
+        return *this;
+    }
+
+    StatusEffect& StatusEffect::SetOnRemoveCommand(std::unique_ptr<skills::Command> command)
+    {
+        on_remove_command = std::move(command);
+        return *this;
+    }
+
+    StatusEffect& StatusEffect::SetCaster(std::weak_ptr<ITargetable> caster_ptr)
+    {
+        this->caster = std::move(caster_ptr);
+        return *this;
+    }
+
+    StatusEffect& StatusEffect::SetTarget(std::weak_ptr<ITargetable> target_ptr)
+    {
+        this->target = std::move(target_ptr);
+        return *this;
     }
 
     bool StatusEffect::operator==(const StatusEffect& other) const

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ostream>
 
+#include "Attribute.h"
 #include "AttributeType.h"
 #include "LifeComponent.h"
 #include "Bonus.h"
@@ -62,7 +63,6 @@ namespace HumanVSOrc
 
     void LifeSystem::TakeDamage(float damage)
     {
-        std::cerr << "Take " << damage << " damage" << std::endl;
         float remaining_damage = damage;
         for (auto it = components.rbegin(); it != components.rend(); ++it)
         {
@@ -115,6 +115,19 @@ namespace HumanVSOrc
             }
         }
         return std::numeric_limits<float>::quiet_NaN();
+    }
+
+    std::shared_ptr<Attribute> LifeSystem::GetComponent(AttributeType attribute_type) const
+    {
+        // Iterate over all components and return the first component that matches the attribute type
+        for (const std::unique_ptr<LifeComponent>& component : components)
+        {
+            if(component->GetAttributeType() == attribute_type)
+            {
+                return component->GetAttribute();
+            }
+        }
+        return nullptr;
     }
 
 

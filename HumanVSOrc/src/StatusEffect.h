@@ -2,48 +2,47 @@
 #include <memory>
 #include <string>
 
+#include "StatusEffectType.h"
+
 namespace HumanVSOrc
 {
     
     namespace skills
     {
-        class Command;
+        class Command; // remove ?
     }
     
     class ITargetable;
     
     class StatusEffect
     {
-    public:
-        enum class Type
-        {
-            NONE,
-            STUNNED,
-            BLEEDING,
-        };
 
     private:
         std::string name;
         int duration = -1; // -1 means infinite
-        Type type = Type::NONE;
+        StatusEffectType type = StatusEffectType::NONE;
+
+        std::unique_ptr<skills::Command> on_apply_command = nullptr;
         std::unique_ptr<skills::Command> on_update_command = nullptr;
-
-        // May add a on_apply_command and on_remove_command later
-
-        // Note: the caster and target are not used in the current implementation
-        // TODO: define these attributes
+        std::unique_ptr<skills::Command> on_remove_command = nullptr;
+        
+        
         std::weak_ptr<ITargetable> caster;
         std::weak_ptr<ITargetable> target;
     
 
     public:
-        StatusEffect(std::string name, int duration=-1, Type type=Type::NONE, std::unique_ptr<skills::Command> on_update_command=nullptr);
-
+        StatusEffect(std::string name, int duration = -1, StatusEffectType type = StatusEffectType::NONE);
         ~StatusEffect();
 
         // Reduce the duration by 1
         // And execute the on_update_command
         void Tick();
+
+        // Called when the status effect is applied
+        void OnApply() const;
+        // Called when the status effect is over
+        void OnRemove() const;
     
         
         bool IsOver() const;
@@ -51,8 +50,15 @@ namespace HumanVSOrc
         // Getters
         std::string GetName() const;
         int GetDuration() const; // should be time left ?
-        Type GetType() const;
+        StatusEffectType GetType() const;
 
+        // Setters
+        StatusEffect& SetOnApplyCommand(std::unique_ptr<skills::Command> command);
+        StatusEffect& SetOnUpdateCommand(std::unique_ptr<skills::Command> command);
+        StatusEffect& SetOnRemoveCommand(std::unique_ptr<skills::Command> command);
+        StatusEffect& SetCaster(std::weak_ptr<ITargetable> caster_ptr);
+        StatusEffect& SetTarget(std::weak_ptr<ITargetable> target_ptr);
+        
         bool operator==(const StatusEffect& other) const;
     };
     

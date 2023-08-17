@@ -23,7 +23,7 @@ namespace HumanVSOrc
     void Unit::Attack()
     {
         // If the unit is stunned, do nothing
-        if(HasStatusEffect(HumanVSOrc::StatusEffect::Type::STUNNED))
+        if(HasStatusEffect(HumanVSOrc::StatusEffectType::STUNNED))
         {
             std::cout << name << " is stunned and cannot attack" << std::endl;
             return;
@@ -50,6 +50,20 @@ namespace HumanVSOrc
         }
         // add the attribute
         attributes[attribute_type] = std::make_shared<Attribute>(attribute_type, display_name, base_value);
+    }
+
+    void Unit::AddDependentAttribute(AttributeType attribute_type, const std::string& display_name, float base_value,
+        std::vector<DependentAttribute::Dependency>& dependencies)
+    {
+        // If the attribute is already present, do something
+        if (HasAttribute(attribute_type))
+        {
+            std::cout << "Attribute of type " << static_cast<int>(attribute_type) <<
+                " already present" << std::endl;
+            return;
+        }
+        // add the attribute
+        attributes[attribute_type] = std::make_shared<DependentAttribute>(attribute_type, display_name, base_value, dependencies);
     }
 
     void Unit::AddLifeComponent(AttributeType attribute_type, const std::string& component_name, float max_value) const
@@ -169,7 +183,7 @@ namespace HumanVSOrc
     void Unit::CastAllSkills()
     {
         // If the unit is stunned, do nothing
-        if (HasStatusEffect(HumanVSOrc::StatusEffect::Type::STUNNED))
+        if (HasStatusEffect(HumanVSOrc::StatusEffectType::STUNNED))
         {
             std::cout << "Unit " << name << " is stunned and cannot cast skills" << std::endl;
             return;
@@ -208,12 +222,20 @@ namespace HumanVSOrc
         auto it = std::remove_if(
             status_effects.begin(),
             status_effects.end(),
-            [](const std::unique_ptr<HumanVSOrc::StatusEffect>& status) { return status->IsOver(); });
+            [](const std::unique_ptr<HumanVSOrc::StatusEffect>& status)
+            {
+              if (status->IsOver())
+              {
+                  status->OnRemove();
+                  return true;
+              }
+                return false;
+            });
 
         status_effects.erase(it, status_effects.end());
     }
 
-    bool Unit::HasStatusEffect(HumanVSOrc::StatusEffect::Type status_effect_type) const
+    bool Unit::HasStatusEffect(HumanVSOrc::StatusEffectType status_effect_type) const
     {
         return std::any_of(
             status_effects.begin(),
@@ -246,6 +268,21 @@ namespace HumanVSOrc
     
         return std::numeric_limits<float>::quiet_NaN();
     
+    }
+
+    std::shared_ptr<Attribute> Unit::GetAttribute(AttributeType attribute_type) const
+    {
+        auto attribute = attributes.find(attribute_type);
+        if (attribute != attributes.end())
+        {
+            return attribute->second;
+        }
+        // If the attribute is not present, search in the LifeSystem
+        if (life_system->HasComponent(attribute_type))
+        {
+            return life_system->GetComponent(attribute_type);
+        }
+        return nullptr;
     }
 
     void Unit::SetName(const std::string& new_name)

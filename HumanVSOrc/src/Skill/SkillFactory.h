@@ -16,6 +16,7 @@ namespace HumanVSOrc
             ~SkillFactory();
             static std::unique_ptr<Skill> CreateChargeSkill();
             static std::unique_ptr<Skill> CreateStunSkill();
+            static std::unique_ptr<Skill> CreateBleedingStrikeSkill();
         
         };
     

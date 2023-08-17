@@ -15,7 +15,7 @@ namespace HumanVSOrc
         // Attributes
     private:
         float value = 0;
-        Attribute max_value;
+        std::shared_ptr<Attribute> max_value;
     
     
     public:
@@ -37,6 +37,7 @@ namespace HumanVSOrc
         float GetMaxValue();
         std::string GetDisplayName() const;
         AttributeType GetAttributeType() const;
+        std::shared_ptr<Attribute> GetAttribute();
 
         // Setters
         void SetValue(float new_value);

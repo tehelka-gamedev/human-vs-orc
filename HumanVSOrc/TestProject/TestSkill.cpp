@@ -109,3 +109,57 @@ TEST_F(TestSkill, TestCharge)
 }
 
 
+// Test Bleeding Strike skill
+TEST_F(TestSkill, TestBleedingStrike)
+{
+    // Create a skill with no command
+    auto skill = SkillFactory::CreateBleedingStrikeSkill();
+    int status_duration = static_cast<int>(GameConstants::Skills::BleedingStrike::DURATION);
+    int cd = skill->GetCooldown(); // cooldown
+    float caster_damage = caster->GetAttributeValue(AttributeType::DAMAGE);
+    float instant_damage = static_cast<float>(GameConstants::Skills::BleedingStrike::INSTANT_DAMAGE);
+    float damage_per_tick = static_cast<float>(GameConstants::Skills::BleedingStrike::DMG_PER_TICK);
+    
+    
+    float target_starting_health = target->GetLifeComponentValue(AttributeType::HEALTH);
+    float target_current_health = target_starting_health;
+    skill->SetSuccessRate(1.0f);
+
+    std::cout << "aaa\n";
+    std::cout << "caster : " << caster << std::endl;
+    
+    // Execute the skill
+    skill->Execute(caster, target);
+
+    // Check that the skill is on cooldown
+    EXPECT_EQ(skill->IsReady(), false);
+    EXPECT_EQ(skill->GetCooldown(), cd);
+    EXPECT_EQ(skill->GetCurrentCooldown(), cd);
+
+    // Check that the target has the bleeding status effect
+    EXPECT_EQ(target->HasStatusEffect(StatusEffectType::BLEEDING), true);
+
+    // Check that the target has lost the instant damage
+    EXPECT_EQ(target->GetLifeComponentValue(AttributeType::HEALTH), target_current_health - instant_damage);
+    target_current_health = target->GetLifeComponentValue(AttributeType::HEALTH);
+
+    // Check that the caster's damage is not modified
+    EXPECT_EQ(caster->GetAttributeValue(AttributeType::DAMAGE), caster_damage);
+
+    
+    // Tick the status effect "status_duration" times and check that the target has lost the damage_per_tick
+    for (int i = 0; i < status_duration ; ++i)
+    {
+        EXPECT_EQ(target->HasStatusEffect(StatusEffectType::BLEEDING), true);
+        target->TickAllStatusEffects();
+        EXPECT_EQ(target->GetLifeComponentValue(AttributeType::HEALTH), target_current_health - damage_per_tick);
+        target_current_health = target->GetLifeComponentValue(AttributeType::HEALTH);
+    }
+
+    // Check that in total the target has lost the instant damage + status_duration * damage_per_tick
+    EXPECT_EQ(target->GetLifeComponentValue(AttributeType::HEALTH),
+              target_starting_health - instant_damage - static_cast<float>(status_duration) * damage_per_tick);
+    // Check that the target has lost the bleeding status effect
+    EXPECT_EQ(target->HasStatusEffect(StatusEffectType::BLEEDING), false);
+    
+}

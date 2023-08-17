@@ -5,6 +5,8 @@
 
 namespace HumanVSOrc
 {
+    class Attribute;
+    
     /*
     LifeSystem class
     This class is responsible for managing the life of a Unit.
@@ -42,6 +44,9 @@ namespace HumanVSOrc
         // If the component does not exist, return std::nanf("")
         float GetComponentValue(AttributeType attribute_type) const;
         float GetComponentMaxValue(AttributeType attribute_type) const;
+        // Get an attribute given its type
+        // If the attribute does not exist, return nullptr
+        std::shared_ptr<Attribute> GetComponent(AttributeType attribute_type) const;
     
     
         // Debug function to print the life components

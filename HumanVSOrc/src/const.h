@@ -39,15 +39,25 @@ namespace HumanVSOrc
             enum class Charge
             {
                 COOLDOWN = 3,
-                SUCCESS_RATE = 60, // 60%
+                SUCCESS_RATE = 70, // 60%
                 DURATION = 1,
             };
 
             enum class Stun
             {
                 COOLDOWN = 5,
-                SUCCESS_RATE = 100, // 20%
+                SUCCESS_RATE = 50, // 20%
                 DURATION = 1,
+            };
+
+            enum class BleedingStrike
+            {
+                COOLDOWN = 4,
+                DURATION = 2,
+                SUCCESS_RATE = 60,
+                INSTANT_DAMAGE = 5,
+                DMG_PER_TICK = 2,
+                
             };
         }
  

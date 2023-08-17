@@ -1,13 +1,18 @@
 # Human VS Orc
 
+
+![Static Badge](https://img.shields.io/badge/coverage-87%25-green?color=%23c0f060)
+
 This project is a small simulation of a battle between two RPG units (a human and an orc).
+
+
 
 ## Goal of this project
 The goal of this project is to have a **clean code architecture** and **be modular** to add easily new RPG classes, skills or attributes.
 
 See the [Class Diagram](#class-diagram) for more details about the architecture design.
 
-Here are the main features implemented:
+**Here are the main features implemented:**
 - [x] Modular skill system with the use of the [Command Pattern](https://refactoring.guru/design-patterns/command)
 - [x] Modular RPG attribute system for units
   - Attributes depending on other attributes (e.g. critcal_chance gaining +1 for each 5 points of agility) can be created.
@@ -17,10 +22,50 @@ Here are the main features implemented:
 - [x] Modular Bonus system for attributes
   - items can be equipped to add bonuses to attributes
   - skills can add bonuses to attributes
-- [ ] Modular Status Effect system for units
-  - units can be stunned, bleeding, etc. TODO : how to handle new status effects? OnTick() method? (e.g. poison)
+- [x] Modular Status Effect system for units
+  - units can be stunned, bleeding, etc...
   - status can be added by skills
 - [x] Modular RPG units with attributes and skills that can be added at runtime
+
+
+## Usage
+
+### How to run
+
+TODO
+
+### Unit Testing
+
+Unit testing is done with [Google Test](https://github.com/google/googletest). The tests are located in the `TestProject` project.
+
+#### How to run the tests
+Either run the project in Rider or Visual Studio, or execute ``.\HumanVSOrc\x64\Debug\TestProject.exe``
+
+#### Test coverage
+
+I'm using [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage) to generate the test coverage. To generate the report, run the following command in the root directory of the project:
+
+```bash
+OpenCppCoverage.exe --sources HumanVSOrc --excluded_sources gtest --excluded_sources Game -- .\HumanVSOrc\x64\Debug\TestProject.exe
+```
+
+It ignores the gtest and Game.cpp files as there is no point to test them.
+
+As of the last commit, the test coverage is 87% although few parts are not tested because they just print debug messages.
+
+
+## Class Diagram
+
+Here is the class diagram of this project. Note that not all methods nor class attributes are present to keep it as readable as possible.
+
+
+![Class Diagram](media/class_diagram-v3.png)
+
+
+
+## How to use this project
+
+Below are several examples of how to use the classes defined in this project in order to create a new RPG unit, add skills, attributes or items to it.
 
 ### How to add a new RPG Unit
 
@@ -68,43 +113,27 @@ std::string display_name = "Dexterity";
 unit.AddAttribute(AttributeType::DEXTERITY, display_name, base_value);
 ```
 
-## How to install
 
-TODO
+You can also define dependant attributes. For instance, let's say that the ``EVASION`` attribute is defined as ``EVASION = +1 for each 5 points of DEXTERITY``. We can do the following:
 
-## Unit Testing
+```c++
+// Define the dependency rules
+auto dexterity = unit.GetAttribute(AttributeType::DEXTERITY);
+std::vector<DependentAttribute::Dependency> dependencies{
+    DependentAttribute::Dependency(dexterity, 1.0f, 5.0f)
+  };
+// Then create the dependent attribute
+unit.AddDependentAttribute(AttributeType::EVASION, "Evasion", 0.0f, dependencies);
 
-Unit testing is done with [Google Test](https://    github.com/google/googletest). The tests are located in the `TestProject` project.
-
-### How to run the tests
-Either run the project in Rider or Visual Studio, or execute ``.\HumanVSOrc\x64\Debug\TestProject.exe``
-
-### Test coverage
-
-I'm using [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage) to generate the test coverage. To generate the report, run the following command in the root directory of the project:
-
-```bash
-OpenCppCoverage.exe --sources HumanVSOrc --excluded_sources gtest --excluded_sources Game -- .\HumanVSOrc\x64\Debug\TestProject.exe
 ```
-
-It ignores the gtest and Game.cpp files as there is no point to test them.
-
-As of the last commit, the test coverage is 87% although few parts are not tested because they just print debug messages.
-
-_Screenshot of the report soon._
-
-## Class Diagram
-
-Here is the class diagram of this project. Note that not all methods nor class attributes are present to keep it as readable as possible.
-
-
-![Class Diagram](media/class_diagram-v3.png)
 
 
 ## Possible Improvements
 
-TODO
-- Only ``EquippableItem`` items are defined but we could easily add ``Consumable`` items (e.g. potions) with the use of the already implemented ``Command`` pattern. 
+- Only ``EquippableItem`` items are defined but we could easily add ``Consumable`` items (e.g. potions) with the use of the already implemented ``Command`` pattern.
 
 
-
+# TODO list:
+- add screenshots
+- update the class diagram and screenshot of it
+- make it playable ?
