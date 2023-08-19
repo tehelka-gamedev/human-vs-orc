@@ -46,7 +46,7 @@ namespace HumanVSOrc
             enum class Stun
             {
                 COOLDOWN = 5,
-                SUCCESS_RATE = 50, // 20%
+                SUCCESS_RATE =  20, // 20%
                 DURATION = 1,
             };
 

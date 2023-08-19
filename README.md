@@ -56,10 +56,10 @@ As of the last commit, the test coverage is 87% although few parts are not teste
 
 ## Class Diagram
 
-Here is the class diagram of this project. Note that not all methods nor class attributes are present to keep it as readable as possible.
+Here is the class diagram of this project. Note that not all methods nor class attributes are present to keep it as readable as possible. Also, Factory classes are not shown.
 
 
-![Class Diagram](media/class_diagram-v3.png)
+![Class Diagram](media/class_diagram-v4.png)
 
 
 

@@ -7,6 +7,8 @@
 
 namespace HumanVSOrc
 {
+    class Bonus;
+    
     class Attribute
     {
         // Attributes
@@ -14,7 +16,7 @@ namespace HumanVSOrc
         AttributeType attribute_type;
         std::string display_name;
         float base_value = 0;
-        std::vector<std::shared_ptr<class Bonus>> raw_bonus;
+        std::vector<std::shared_ptr<Bonus>> raw_bonus;
         std::vector<std::shared_ptr<Bonus>> final_bonus;
 
         float final_value = 0; // Cache the final value to avoid recalculating it every time.

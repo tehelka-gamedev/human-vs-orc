@@ -6,7 +6,8 @@
 namespace HumanVSOrc
 {
     class Attribute;
-    
+    class LifeComponent;
+    class Bonus;
     /*
     LifeSystem class
     This class is responsible for managing the life of a Unit.
@@ -16,7 +17,7 @@ namespace HumanVSOrc
     {
         // Attributes
     private:
-        std::vector<std::unique_ptr<class LifeComponent>> components;
+        std::vector<std::unique_ptr<LifeComponent>> components;
     
     public:
         LifeSystem();
@@ -24,8 +25,8 @@ namespace HumanVSOrc
 
         // Iterate over all components and add the bonus to the first
         // component that matches the bonus target attribute
-        void AddBonus(const std::shared_ptr<class Bonus>& bonus);
-        void RemoveBonus(std::shared_ptr<class Bonus>& bonus);
+        void AddBonus(const std::shared_ptr<Bonus>& bonus);
+        void RemoveBonus(std::shared_ptr<Bonus>& bonus);
     
         bool HasComponent(enum class AttributeType attribute_type) const;
 
