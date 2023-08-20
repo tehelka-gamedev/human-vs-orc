@@ -75,7 +75,7 @@ public:
 
     //// Equipment
     void Equip(std::shared_ptr<EquippableItem> equippable_item);
-    // Unequip the item in the given slot, should return the item (TODO later)
+    // Unequip the item in the given slot (should be better to return the item, but not done)
     void Unequip(Equipment::Slot equipment_slot);
 
 

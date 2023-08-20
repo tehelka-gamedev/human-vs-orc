@@ -15,6 +15,7 @@ namespace HumanVSOrc
 
         unit->AddSkill(skills::SkillFactory::CreateChargeSkill());
         
+        
         return unit;
     }
 

@@ -41,6 +41,7 @@ namespace HumanVSOrc
     
         // Methods
         void Print() const;
+        bool IsSlotEquipped(Slot slot) const;
     };
     
 }

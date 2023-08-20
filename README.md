@@ -1,7 +1,9 @@
 # Human VS Orc
 
 
-![Static Badge](https://img.shields.io/badge/coverage-87%25-green?color=%23c0f060)
+![Static Badge](https://img.shields.io/badge/coverage-85%25-green?color=%23c0f060)
+
+![screenshot01.png](media/screenshot01.png)![screenshot02.png](media/screenshot02.png)
 
 This project is a small simulation of a battle between two RPG units (a human and an orc).
 
@@ -51,7 +53,7 @@ OpenCppCoverage.exe --sources HumanVSOrc --excluded_sources gtest --excluded_sou
 
 It ignores the gtest and Game.cpp files as there is no point to test them.
 
-As of the last commit, the test coverage is 87% although few parts are not tested because they just print debug messages.
+As of the last commit, the test coverage is 85% although few parts are not tested because they just print debug messages.
 
 
 ## Class Diagram
@@ -135,5 +137,4 @@ unit.AddDependentAttribute(AttributeType::EVASION, "Evasion", 0.0f, dependencies
 
 # TODO list:
 - add screenshots
-- update the class diagram and screenshot of it
 - make it playable ?

@@ -17,14 +17,12 @@ namespace HumanVSOrc
 
     void Equipment::EquipItem(std::shared_ptr<EquippableItem> item, Slot slot)
     {
-        std::cerr << "Equip " << item->GetName() << " in slot " << static_cast<int>(slot) << std::endl;
         equipped_items[static_cast<int>(slot)] = item;
     }
 
     std::shared_ptr<EquippableItem> Equipment::UnequipSlot(Slot slot)
     {
         std::shared_ptr<EquippableItem> item = equipped_items[static_cast<int>(slot)];
-        std::cerr << "Unequip slot " << static_cast<int>(slot) << std::endl;
         equipped_items[static_cast<int>(slot)] = nullptr;
         return item;
     }
@@ -39,5 +37,9 @@ namespace HumanVSOrc
             }
         }
     }
-    
+
+    bool Equipment::IsSlotEquipped(Slot slot) const
+    {
+        return equipped_items[static_cast<int>(slot)] != nullptr;
+    }
 }

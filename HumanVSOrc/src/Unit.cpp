@@ -22,6 +22,7 @@ namespace HumanVSOrc
 
     void Unit::Attack()
     {
+        std::cout << name << " tries to attack" << std::endl;
         // If the unit is stunned, do nothing
         if(HasStatusEffect(HumanVSOrc::StatusEffectType::STUNNED))
         {
@@ -142,6 +143,7 @@ namespace HumanVSOrc
 
     void Unit::TakeDamage(float amount) const
     {
+        std::cout << name << " takes " << amount << " damage" << std::endl;
         life_system->TakeDamage(amount);
     }
 
@@ -161,8 +163,11 @@ namespace HumanVSOrc
 
     void Unit::Equip(std::shared_ptr<EquippableItem> equippable_item)
     {
-        // TODO : if already item in this slot, unequip it first
-        // ...
+        // if already item in this slot, unequip it first
+        if (equipment->IsSlotEquipped(equippable_item->GetSlot()))
+        {
+            Unequip(equippable_item->GetSlot());
+        }
 
         AddMultipleBonus(equippable_item->GetBonusesByReference());
         equipment->EquipItem(equippable_item, equippable_item->GetSlot());
@@ -206,7 +211,8 @@ namespace HumanVSOrc
 
     void Unit::AddStatusEffect(std::unique_ptr<HumanVSOrc::StatusEffect> status_effect)
     {   
-        // TODO : if already status effect of this type, do something
+        // As of now, status effect of the same type will apply as if they were different
+        // As this is just a proof of concept, this is not taken into account
         status_effects.push_back(std::move(status_effect));
     
     }

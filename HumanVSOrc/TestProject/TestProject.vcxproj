@@ -41,6 +41,7 @@
     <ClCompile Include="..\src\DependentAttribute.cpp" />
     <ClCompile Include="..\src\Equipment.cpp" />
     <ClCompile Include="..\src\EquippableItem.cpp" />
+    <ClCompile Include="..\src\EquippableItemFactory.cpp" />
     <ClCompile Include="..\src\Game.cpp" />
     <ClCompile Include="..\src\ITargetable.cpp" />
     <ClCompile Include="..\src\LifeComponent.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="..\src\DependentAttribute.h" />
     <ClInclude Include="..\src\Equipment.h" />
     <ClInclude Include="..\src\EquippableItem.h" />
+    <ClInclude Include="..\src\EquippableItemFactory.h" />
     <ClInclude Include="..\src\Game.h" />
     <ClInclude Include="..\src\ITargetable.h" />
     <ClInclude Include="..\src\LifeComponent.h" />
