@@ -133,8 +133,3 @@ unit.AddDependentAttribute(AttributeType::EVASION, "Evasion", 0.0f, dependencies
 ## Possible Improvements
 
 - Only ``EquippableItem`` items are defined but we could easily add ``Consumable`` items (e.g. potions) with the use of the already implemented ``Command`` pattern.
-
-
-# TODO list:
-- add screenshots
-- make it playable ?
