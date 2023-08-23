@@ -3,8 +3,8 @@
 #include <random>
 
 
-#include "src/Game.h"
-#include "src/RandomGenerator.h"
+#include "Game.h"
+#include "RandomGenerator.h"
 
 
 int main(int argc, char* argv[])

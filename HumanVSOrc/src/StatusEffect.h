@@ -3,6 +3,7 @@
 #include <string>
 
 #include "StatusEffectType.h"
+#include "Skill/Command.h"
 
 namespace HumanVSOrc
 {

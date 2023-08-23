@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "AttributeType.h"
+
 namespace HumanVSOrc
 {
     class Attribute;
@@ -28,7 +30,7 @@ namespace HumanVSOrc
         void AddBonus(const std::shared_ptr<Bonus>& bonus);
         void RemoveBonus(std::shared_ptr<Bonus>& bonus);
     
-        bool HasComponent(enum class AttributeType attribute_type) const;
+        bool HasComponent(AttributeType attribute_type) const;
 
         void Tick();
     
@@ -39,7 +41,7 @@ namespace HumanVSOrc
         // Returns true if all life components are depleted
         bool IsDepleted() const;
     
-        void AddComponent(enum class AttributeType attribute_type, const std::string& display_name, float max_value);
+        void AddComponent(AttributeType attribute_type, const std::string& display_name, float max_value);
 
         // Get a component value or max value, given its name
         // If the component does not exist, return std::nanf("")

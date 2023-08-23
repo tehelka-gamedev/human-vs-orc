@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <memory>
 
+#include "Command.h"
 #include "Skill.h"
 
 namespace HumanVSOrc

@@ -37,3 +37,6 @@ HumanVSOrc/packages
 HumanVSOrc/TestProject/x64
 CoverageReport-*
 LastCoverageResults.log
+
+build/
+HumanVSOrc/bin/

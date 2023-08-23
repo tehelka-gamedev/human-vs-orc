@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <limits>
 
 #include "Equipment.h"
 #include "EquippableItem.h"

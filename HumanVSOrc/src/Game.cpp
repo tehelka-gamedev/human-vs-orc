@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <iostream>
 
+#include "Skill/Command.h"
 #include "EquippableItem.h"
 #include "EquippableItemFactory.h"
 #include "Unit.h"
@@ -140,6 +141,14 @@ namespace HumanVSOrc
         std::cout << std::endl;
         std::cout << std::endl;
         std::cout << " -- GAME OVER -- " << std::endl;
+
+        // If there is no winner, it's a draw
+        if(winner == nullptr)
+        {
+            std::cout << "It's a draw! Both units are dead." << std::endl;
+            return;
+        }
+        
         std::cout << "The winner is " << winner->GetName() << "!" << std::endl;
         std::cout << winner->GetName() << " status:" << std::endl;
         winner->PrintInfo();

@@ -32,23 +32,54 @@ See the [Class Diagram](#class-diagram) for more details about the architecture 
 
 ## Usage
 
-### How to run
+### How to build and run
 
-TODO
+Build the project using CMake, while in the root directory of the repository:
+  
+If you are using a single configuration generator like Unix Makefiles, specify the -DCMAKE_BUILD_TYPE parameter to either "Debug" or "Release" (default is Debug):
+  ```bash
+  # OPTION 1 : Configure the build in Release
+  cmake -S HumanVSOrc -B build -DCMAKE_BUILD_TYPE=Release
+  # build the binaries
+  cmake --build build
+
+  # OPTION 2 : Configure the build in Debug
+  cmake -S HumanVSOrc -B build -DCMAKE_BUILD_TYPE=Debug
+  # build the binaries
+  cmake --build build
+```
+
+Otherwise, if you are using a multi-configuration generator like Visual Studio, do not specify the -DCMAKE_BUILD_TYPE parameter:
+
+```bash
+  # Configure the build
+  cmake -S HumanVSOrc -B build
+  # Build debug binaries
+  cmake --build build --config Debug
+  # Build release binaries
+  cmake --build build --config Release
+  ```
+
+The binaries will be located in the ``HumanVSOrc/bin`` folder. It contains the following executables:
+- ``HumanVSOrc(.exe)``: the main game/simulation project
+- ``TestProject(.exe)``: the unit testing project
+
+These commands will build the project in Release mode. To build in Debug mode, just replace ``Release`` by ``Debug`` in the commands above.
+
 
 ### Unit Testing
 
-Unit testing is done with [Google Test](https://github.com/google/googletest). The tests are located in the `TestProject` project.
+Unit testing is done with [Google Test](https://github.com/google/googletest). The tests sources are located in the `HumanVSOrc/TestProject` folder.
 
-#### How to run the tests
-Either run the project in Rider or Visual Studio, or execute ``.\HumanVSOrc\x64\Debug\TestProject.exe``
+To run the tests, you can either run the ``TestProject`` executable (see above) or run the tests in your IDE (e.g. Rider or Visual Studio).
+
 
 #### Test coverage
 
-I'm using [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage) to generate the test coverage. To generate the report, run the following command in the root directory of the project:
+I'm using [OpenCppCoverage](https://github.com/OpenCppCoverage/OpenCppCoverage) to generate the test coverage. To generate the report, run the following command in the root directory of the repository:
 
 ```bash
-OpenCppCoverage.exe --sources HumanVSOrc --excluded_sources gtest --excluded_sources Game -- .\HumanVSOrc\x64\Debug\TestProject.exe
+OpenCppCoverage.exe --sources HumanVSOrc --excluded_sources gtest --excluded_sources Game -- .\HumanVSOrc\bin\Debug\TestProject.exe
 ```
 
 It ignores the gtest and Game.cpp files as there is no point to test them.

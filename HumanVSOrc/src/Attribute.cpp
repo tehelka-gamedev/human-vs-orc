@@ -1,6 +1,7 @@
 ﻿#include "Attribute.h"
 
 #include <iostream>
+#include <algorithm>
 
 #include "Bonus.h"
 

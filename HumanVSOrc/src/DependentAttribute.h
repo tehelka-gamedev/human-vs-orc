@@ -29,7 +29,7 @@ namespace HumanVSOrc
         float CalculateFinalValue() override;
 
     public:
-        DependentAttribute(AttributeType type, const std::string& name, float value, std::vector<Dependency>& dependencies);
+        DependentAttribute(AttributeType type, const std::string& name, float value, const std::vector<Dependency>& dependencies);
 
         // Override the mother class GetValue() method to recalculate the final value all the time.
         // This is because the final value of a DependentAttribute depends on the final value of other attributes.

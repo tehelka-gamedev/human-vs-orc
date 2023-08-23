@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <utility>
+#include <cmath>
 
 namespace HumanVSOrc
 {
@@ -43,7 +44,7 @@ namespace HumanVSOrc
     }
 
     DependentAttribute::DependentAttribute(AttributeType type, const std::string& name, float value,
-                                          std::vector<Dependency>& dependencies) : Attribute(type, name, value), dependencies(dependencies)
+                                          const std::vector<Dependency>& dependencies) : Attribute(type, name, value), dependencies(dependencies)
     {
     }
 
