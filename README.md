@@ -1,7 +1,7 @@
 # Human VS Orc
 
 
-![Static Badge](https://img.shields.io/badge/coverage-85%25-green?color=%23c0f060)
+![Static Badge](https://img.shields.io/badge/coverage-86%25-green?color=%23c0f060)
 
 ![screenshot01.png](media/screenshot01.png)![screenshot02.png](media/screenshot02.png)
 
@@ -84,7 +84,7 @@ OpenCppCoverage.exe --sources HumanVSOrc --excluded_sources gtest --excluded_sou
 
 It ignores the gtest and Game.cpp files as there is no point to test them.
 
-As of the last commit, the test coverage is 85% although few parts are not tested because they just print debug messages.
+As of the last commit, the test coverage is 86% although few parts are not tested because they just print debug messages.
 
 
 ## Class Diagram
@@ -92,7 +92,7 @@ As of the last commit, the test coverage is 85% although few parts are not teste
 Here is the class diagram of this project. Note that not all methods nor class attributes are present to keep it as readable as possible. Also, Factory classes are not shown.
 
 
-![Class Diagram](media/class_diagram-v4.png)
+![Class Diagram](media/class_diagram-v5.png)
 
 
 

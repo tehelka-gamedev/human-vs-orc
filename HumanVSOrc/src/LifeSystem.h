@@ -4,11 +4,12 @@
 #include <vector>
 
 #include "AttributeType.h"
+#include "AttributeGauge.h"
 
 namespace HumanVSOrc
 {
     class Attribute;
-    class LifeComponent;
+    class AttributeGauge;
     class Bonus;
     /*
     LifeSystem class
@@ -19,41 +20,30 @@ namespace HumanVSOrc
     {
         // Attributes
     private:
-        std::vector<std::unique_ptr<LifeComponent>> components;
-    
+        std::vector<std::weak_ptr<AttributeGauge>> components;
+
     public:
         LifeSystem();
         ~LifeSystem();
 
-        // Iterate over all components and add the bonus to the first
-        // component that matches the bonus target attribute
-        void AddBonus(const std::shared_ptr<Bonus>& bonus);
-        void RemoveBonus(std::shared_ptr<Bonus>& bonus);
-    
         bool HasComponent(AttributeType attribute_type) const;
 
-        void Tick();
-    
         // Take damage to the first non-depleted life component
         // until the damage is depleted, starting from the last added component
         void TakeDamage(float damage);
 
         // Returns true if all life components are depleted
         bool IsDepleted() const;
-    
-        void AddComponent(AttributeType attribute_type, const std::string& display_name, float max_value);
+
+        void AddComponent(const std::shared_ptr<AttributeGauge>& component);
 
         // Get a component value or max value, given its name
         // If the component does not exist, return std::nanf("")
         float GetComponentValue(AttributeType attribute_type) const;
         float GetComponentMaxValue(AttributeType attribute_type) const;
-        // Get an attribute given its type
-        // If the attribute does not exist, return nullptr
-        std::shared_ptr<Attribute> GetComponent(AttributeType attribute_type) const;
-    
-    
+        
+
         // Debug function to print the life components
         void PrintComponents() const;
     };
-    
 }

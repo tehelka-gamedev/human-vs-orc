@@ -68,7 +68,7 @@ namespace HumanVSOrc
         attributes[attribute_type] = std::make_shared<DependentAttribute>(attribute_type, display_name, base_value, dependencies);
     }
 
-    void Unit::AddLifeComponent(AttributeType attribute_type, const std::string& component_name, float max_value) const
+    void Unit::AddLifeComponent(AttributeType attribute_type, const std::string& component_name, float max_value)
     {
         // If the attribute is already present, do something
         if (HasAttribute(attribute_type))
@@ -77,7 +77,11 @@ namespace HumanVSOrc
                 " already present" << std::endl;
             return;
         }
-        life_system->AddComponent(attribute_type, component_name, max_value);
+
+        // Create the AttributeGauge and add it to the life system
+        const std::shared_ptr<AttributeGauge> attribute_gauge = std::make_shared<AttributeGauge>(attribute_type, component_name, max_value);
+        attributes[attribute_type] = attribute_gauge;
+        life_system->AddComponent(attribute_gauge);
     }
 
     void Unit::AddBonus(const std::shared_ptr<Bonus>& bonus)
@@ -97,11 +101,6 @@ namespace HumanVSOrc
         {
             attributes[attribute_type]->AddBonus(bonus);
         }
-        else if (life_system->HasComponent(attribute_type))
-        {
-            life_system->AddBonus(bonus);
-        }
-    
     }
 
     void Unit::AddMultipleBonus(const std::vector<std::shared_ptr<Bonus>>& bonuses)
@@ -128,10 +127,7 @@ namespace HumanVSOrc
         {
             attributes[attribute_type]->RemoveBonus(bonus);
         }
-        else if (life_system->HasComponent(attribute_type))
-        {
-            life_system->RemoveBonus(bonus);
-        }
+       
     }
 
     void Unit::RemoveMultipleBonus(std::vector<std::shared_ptr<Bonus>>& bonuses)
@@ -159,7 +155,6 @@ namespace HumanVSOrc
         {
             attribute.second->Tick();
         }
-        life_system->Tick();
     }
 
     void Unit::Equip(std::shared_ptr<EquippableItem> equippable_item)
@@ -284,11 +279,7 @@ namespace HumanVSOrc
         {
             return attribute->second;
         }
-        // If the attribute is not present, search in the LifeSystem
-        if (life_system->HasComponent(attribute_type))
-        {
-            return life_system->GetComponent(attribute_type);
-        }
+       
         return nullptr;
     }
 

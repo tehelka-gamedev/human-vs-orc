@@ -53,7 +53,7 @@ public:
     
     void AddAttribute(AttributeType attribute_type, const std::string& display_name, float base_value);
     void AddDependentAttribute(AttributeType attribute_type, const std::string& display_name, float base_value, std::vector<DependentAttribute::Dependency>& dependencies);
-    void AddLifeComponent(AttributeType attribute_type, const std::string& component_name, float max_value) const;
+    void AddLifeComponent(AttributeType attribute_type, const std::string& component_name, float max_value);
 
     // public for now to be able to test
     // but may be private later
